@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="player.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="player.css">
+
+    <title>Music Player</title>
+</head>
+
+<body>
+    <!-- audio player  -->
+    <div class="audio-player">
+        <!-- id for the play button -->
+        <div id="play-btn"></div>
+        <div class="audio-wrapper" id="player-container" href="javascript:;">
+            <!-- work in progress -->
+          <audio id="player" ontimeupdate="initProgressBar()">
+                  <source src="..." type="audio/mp3">
+                </audio>
+        </div>
+        <div class="player-controls scrubber">
+          <p>Title <small>by</small> Song Title</p>
+          <span id="seekObjContainer">
+                  <progress id="seekObj" value="0" max="1"></progress>
+                </span>
+          <br>
+          <small style="float: left; position: relative; left: 15px;" class="start-time"></small>
+          <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
+    
+        </div>
+        <!-- default set up will change once we figure out how to link it -->
+        <div class="album-image" style="background-image: url('https://artwork-cdn.7static.com/static/img/sleeveart/00/051/614/0005161476_350.jpg')"></div>
+      </div>
+    <script type="text/javascript" src="player.js"></script>
+</body>
+
+</html>
