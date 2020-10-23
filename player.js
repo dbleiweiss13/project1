@@ -19,7 +19,7 @@ function calculateTotalValue(length) {
   
     return current_time;
   }
-  
+  // some of these dont work lol
   function initProgressBar() {
     var player = document.getElementById('player');
     var length = player.duration
@@ -27,11 +27,11 @@ function calculateTotalValue(length) {
   
     // calculate total length of value
     var totalLength = calculateTotalValue(length)
-    jQuery(".end-time").html(totalLength);
+    $(".end-time").html(totalLength);
   
     // calculate current value time
     var currentTime = calculateCurrentValue(current_time);
-    jQuery(".start-time").html(currentTime);
+    $(".start-time").html(currentTime);
   
     var progressbar = document.getElementById('seekObj');
     progressbar.value = (player.currentTime / player.duration);
