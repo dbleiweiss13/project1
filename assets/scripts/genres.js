@@ -13,18 +13,20 @@ $(document).ready(function() {
 
 
     genres.forEach(e => {
-        var button = $('<div>');
-        button.text(e);
-        button.addClass('click');
-        button.attr('data-genre',e);
-        button.attr('id',e);
-        $('#buttonDivs').append(button);
+
+        var button = $('<button>');
+        button.text(e):
+        button.addClass("click");
+        button.attr("data-genre", e);
+        button.attr("id", e);
+        $("#btnDiv").append(button);
     });
 
     // on click function on buttons
-    $('.click').on('click', function () {
+    $(".click").on("click", function () {
+
         //logic to handle storage 
-        var genre = $(this).attr('data-genre')
+        var genre = $(this).attr("data-genre");
         // function to handle data storage
         if (maxedOut.indexOf(genre) == -1) {
             lastClick = genre;
@@ -33,6 +35,12 @@ $(document).ready(function() {
             // $('#' + genre).
         }
         // function to see if total was hit
+
+        if (wasMaxed(genre)) {
+            $(this).attr("disabled", true);
+        } else if (allMaxed()){
+            $(".click").attr("disabled", true);
+        }
 
         // calls the styling of the clicked circles to change in size
         circleChange(genre, this);
@@ -88,13 +96,36 @@ $(document).ready(function() {
         }
         else {
 
-            picked.count ++;
+            picked.count++;
+
             if (picked.count == 3) {
                 maxedOut.push(genre)
             }
         }
 
+
     }
+
+    function wasMaxed(genre) {   
+        function isPicked(picked) {
+            return picked.genre === genre;
+        }
+
+        var picked = musicPref.find(isPicked);
+
+        return(picked.count === genreMaxClicks);
+    }
+
+    function allMaxed(){
+        var tot = 0;
+
+        musicPref.forEach(e => {
+            tot += e.count;
+        });
+
+        return (tot === maxClicks);
+    }
+
 
     // function to handled the css
     function circleChange(genre, el) {
@@ -119,3 +150,4 @@ $(document).ready(function() {
         }
     }
 });
+
