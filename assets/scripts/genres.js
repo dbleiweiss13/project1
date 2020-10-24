@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var genres = ['rock', 'country', 'rap', 'R&B', 'Pop', 'Reggae'];
+    var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
     var maxedOut = [];
 
     //max counter per button
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 
     genres.forEach(e => {
-        
+
         var button = $('<button>');
         button.text(e);
         button.addClass("click small");
@@ -44,38 +44,38 @@ $(document).ready(function () {
     });
 
     // function to undo
-    $('#undo').on('click',function(){
+    $('#undo').on('click', function () {
         if (lastClick != null) {
-            function isPicked(picked) { 
+            function isPicked(picked) {
                 return picked.genre === lastClick;
             }
-    
+
             var picked = musicPref.find(isPicked);
             var i = picked.index;
 
             var id = '#' + picked.genre
-    
+
             if (musicPref[i].count === 3) {
                 $(id).attr("disabled", true);
-                maxedOut.splice(maxedOut.indexOf(picked.genre),1)
+                maxedOut.splice(maxedOut.indexOf(picked.genre), 1)
             }
-    
+
             if (maxClicks === 5) {
                 $(".click").attr("disabled", false);
             }
-    
+
             $(id).removeClass('medium');
             $(id).removeClass('large');
             $(id).removeClass('largest');
-    
+
             picked.count--;
-    
-            if(musicPref[i].count == 0) {
+
+            if (musicPref[i].count == 0) {
                 $(id).addClass('small')
-                musicPref.splice(i,1)
+                musicPref.splice(i, 1)
                 prefIndex--;
             } else {
-                circleChange(picked.genre, id);    
+                circleChange(picked.genre, id);
             }
 
             musicPref.forEach(e => {
@@ -83,31 +83,25 @@ $(document).ready(function () {
                     $('#' + e.genre).attr("disabled", true);
                 }
             });
-    
+
             lastClick = null;
             wasMaxed(genre);
             allMaxed();
         }
     })
 
-    $('#reset').on('click',function(){
-        musicPref.length = 0
-        prefIndex = 0
-        maxedOut.length = 0
+    $('#reset').on('click', function () {
+        musicPref.length = 0;
+        prefIndex = 0;
+        maxedOut.length = 0;
 
-        $('.click').removeClass('medium')
-        $('.click').removeClass('large')
-        $('.click').removeClass('largest')
+        $('.click').removeClass('medium');
+        $('.click').removeClass('large');
+        $('.click').removeClass('largest');
 
         $(".click").attr("disabled", false);
 
-        $('.click').addClass('small')
-    })
-
-    $('#next').on('click',function(){
-        //save data to local storage
-
-        //navigate to the next page
+        $('.click').addClass('small');
     })
 
     //store preferences
@@ -135,7 +129,7 @@ $(document).ready(function () {
             picked.count++;
 
             if (picked.count == 3) {
-                maxedOut.push(genre)
+                maxedOut.push(genre);
             }
         }
 
@@ -149,7 +143,7 @@ $(document).ready(function () {
 
         var picked = musicPref.find(isPicked);
 
-        if(picked.count >= genreMaxClicks){
+        if (picked.count === genreMaxClicks) {
             $(this).attr("disabled", true);
         } else {
             $(this).attr("disabled", false);
@@ -163,7 +157,7 @@ $(document).ready(function () {
             tot += e.count;
         });
 
-        if(tot === maxClicks){
+        if (tot === maxClicks) {
             $(".click").attr("disabled", true);
         } else {
             $(".click").attr("disabled", false);
@@ -180,7 +174,7 @@ $(document).ready(function () {
 
         var picked = musicPref.find(isPicked);
 
-        if(picked.count == 0){
+        if (picked.count == 0) {
             $(el).removeClass("medium");
             $(el).removeClass("large");
             $(el).removeClass("largest");
@@ -205,5 +199,19 @@ $(document).ready(function () {
             $(el).addClass("largest");
         }
     }
+
+    $("#next").on("click", function () {
+        var tot = 0;
+
+        musicPref.forEach(e => {
+            tot += e.count;
+        });
+
+        if (tot === maxClicks){
+            localStorage.setItem("prefs", JSON.stringify(musicPref));
+            window.location.href = "./test.html";
+        }
+    });
+
 });
 
