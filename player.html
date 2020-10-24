@@ -4,37 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script type="text/javascript" src="player.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="player.css">
-
-    <title>Music Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./player.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <!-- audio player  -->
-    <div class="audio-player">
-        <!-- id for the play button -->
-        <div id="play-btn"></div>
-        <div class="audio-wrapper" id="player-container" href="javascript:;">
-            <!-- work in progress -->
-          <audio id="player" ontimeupdate="initProgressBar()">
-                  <source src="..." type="audio/mp3">
-                </audio>
-        </div>
-        <div class="player-controls scrubber">
-          <p>Title <small>by</small> Song Title</p>
-          <span id="seekObjContainer">
-                  <progress id="seekObj" value="0" max="1"></progress>
-                </span>
-          <br>
-          <small style="float: left; position: relative; left: 15px;" class="start-time"></small>
-          <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
-    
-        </div>
-        <!-- default set up will change once we figure out how to link it -->
-        <div class="album-image" style="background-image: url('https://artwork-cdn.7static.com/static/img/sleeveart/00/051/614/0005161476_350.jpg')"></div>
-      </div>
-    <script type="text/javascript" src="player.js"></script>
+    <div class="music-player-container is-playing">
+
+		<div class="music-player">
+			<div class="player-content-container">
+				<h1 class="artist-name">Incubus</h1><!--  /.track-title -->
+				<h2 class="album-title">Make Yourself</h2><!--  /.album-title -->
+				<h3 class="song-title">"Stellar"</h3><!--  /.song-title -->
+				<div class="music-player-controls">
+					<div class="control-back"></div><!--  /.control-back -->
+					<div class="control-play"></div><!--  /.control-play -->
+					<div class="control-forwards"></div><!--  /.control-forwards -->
+				</div><!--  /.music-player-controls -->
+			</div><!--  /.player-content-container -->
+		</div><!--  /.music-player -->
+
+		<div class="album">
+			<div class="album-art"></div><!--  /.album-art -->
+			<div class="vinyl"></div><!--  /.vinyl -->
+		</div><!--  /.album-art -->
+
+	</div><!--  /.music-player -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./player.js"></script>
 </body>
 
 </html>
