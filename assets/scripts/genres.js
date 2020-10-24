@@ -36,38 +36,56 @@ $(document).ready(function () {
         }
         // function to see if total was hit
 
-        if (wasMaxed(genre)) {
-            $(this).attr("disabled", true);
-        } else if (allMaxed()) {
-            $(".click").attr("disabled", true);
-        }
+        wasMaxed(genre);
+        allMaxed();
 
         // calls the styling of the clicked circles to change in size
         circleChange(genre, this);
     });
 
     // function to undo
-    $('#undo').on('click', function () {
+    $('#undo').on('click',function(){
+        if (lastClick != null) {
+            function isPicked(picked) { 
+                return picked.genre === lastClick;
+            }
+    
+            var picked = musicPref.find(isPicked);
+            var i = picked.index;
 
-        function isPicked(picked) {
-            return picked.genre === lastClick;
-        }
+            var id = '#' + picked.genre;
+    
+            $(id).removeClass('medium');
+            $(id).removeClass('large');
+            $(id).removeClass('largest');
+    
+            picked.count--;
+    
+            if(musicPref[i].count == 0) {
+                musicPref.splice(i, 1);
+                prefIndex--;
+            } else {
+                circleChange(picked.genre, id);    
+            }
 
-        var picked = musicPref.find(isPicked);
-        var i = picked.index
-
-        musicPref[i].count--;
-
-        if (musicPref[i].count == 0) {
-            musicPref.splice(i, 1)
-            prefIndex--;
+            if(maxedOut.indexOf(picked.genre) != -1){
+                console.log("test");
+            }
+    
+            lastClick = null;
+            wasMaxed(genre);
+            allMaxed();
         }
     })
 
     $('#reset').on('click', function () {
-        musicPref.length = 0
-        prefIndex = 0
-        maxedOut.length = 0
+        musicPref.length = 0;
+        musicPref = [];
+        prefIndex = 0;
+        maxedOut.length = 0;
+        maxedOut = [];
+        wasMaxed(genre);
+        allMaxed();
     });
 
     //store preferences
@@ -88,6 +106,7 @@ $(document).ready(function () {
                 }
             )
             prefIndex++;
+
         }
         else {
 
@@ -108,7 +127,11 @@ $(document).ready(function () {
 
         var picked = musicPref.find(isPicked);
 
-        return (picked.count === genreMaxClicks);
+        if(picked.count >= genreMaxClicks){
+            $(this).attr("disabled", true);
+        } else {
+            $(this).attr("disabled", false);
+        }
     }
 
     function allMaxed() {
@@ -118,7 +141,11 @@ $(document).ready(function () {
             tot += e.count;
         });
 
-        return (tot === maxClicks);
+        if(tot === maxClicks){
+            $(".click").attr("disabled", true);
+        } else {
+            $(".click").attr("disabled", false);
+        }
     }
 
 
@@ -131,14 +158,26 @@ $(document).ready(function () {
 
         var picked = musicPref.find(isPicked);
 
+        if(picked.count == 0){
+            $(el).removeClass("medium");
+            $(el).removeClass("large");
+            $(el).removeClass("largest");
+            $(el).addClass("small");
+        }
         if (picked.count == 1) {
+            $(el).removeClass("small");
+            $(el).removeClass("large");
+            $(el).removeClass("largest");
             $(el).addClass("medium");
         }
         if (picked.count == 2) {
+            $(el).removeClass("small");
             $(el).removeClass("medium");
+            $(el).removeClass("largest");
             $(el).addClass("large");
         }
         if (picked.count == 3) {
+            $(el).removeClass("small");
             $(el).removeClass("medium");
             $(el).removeClass("large");
             $(el).addClass("largest");
