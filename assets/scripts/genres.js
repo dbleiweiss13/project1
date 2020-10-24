@@ -16,7 +16,7 @@ $(document).ready(function () {
         
         var button = $('<button>');
         button.text(e);
-        button.addClass("click");
+        button.addClass("click small");
         button.attr("data-genre", e);
         button.attr("id", e);
         $("#btnDiv").append(button);
@@ -53,7 +53,16 @@ $(document).ready(function () {
             var picked = musicPref.find(isPicked);
             var i = picked.index;
 
-            var id = '#' + picked.genre;
+            var id = '#' + picked.genre
+    
+            if (musicPref[i].count === 3) {
+                $(id).attr("disabled", true);
+                maxedOut.splice(maxedOut.indexOf(picked.genre),1)
+            }
+    
+            if (maxClicks === 5) {
+                $(".click").attr("disabled", false);
+            }
     
             $(id).removeClass('medium');
             $(id).removeClass('large');
@@ -62,15 +71,18 @@ $(document).ready(function () {
             picked.count--;
     
             if(musicPref[i].count == 0) {
-                musicPref.splice(i, 1);
+                $(id).addClass('small')
+                musicPref.splice(i,1)
                 prefIndex--;
             } else {
                 circleChange(picked.genre, id);    
             }
 
-            if(maxedOut.indexOf(picked.genre) != -1){
-                console.log("test");
-            }
+            musicPref.forEach(e => {
+                if (e.count == 3) {
+                    $('#' + e.genre).attr("disabled", true);
+                }
+            });
     
             lastClick = null;
             wasMaxed(genre);
@@ -78,15 +90,25 @@ $(document).ready(function () {
         }
     })
 
-    $('#reset').on('click', function () {
-        musicPref.length = 0;
-        musicPref = [];
-        prefIndex = 0;
-        maxedOut.length = 0;
-        maxedOut = [];
-        wasMaxed(genre);
-        allMaxed();
-    });
+    $('#reset').on('click',function(){
+        musicPref.length = 0
+        prefIndex = 0
+        maxedOut.length = 0
+
+        $('.click').removeClass('medium')
+        $('.click').removeClass('large')
+        $('.click').removeClass('largest')
+
+        $(".click").attr("disabled", false);
+
+        $('.click').addClass('small')
+    })
+
+    $('#next').on('click',function(){
+        //save data to local storage
+
+        //navigate to the next page
+    })
 
     //store preferences
     function trackPicks(genre) {
