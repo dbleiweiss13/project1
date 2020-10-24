@@ -33,7 +33,8 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   z-index: 0;
 }
 .music-player {
-  background-color: #fff;
+  background-color: rgb(212, 220, 192);
+  border-radius: 12px;
   height: 370px;
   padding: 40px 250px 40px 40px;
   position: absolute;
@@ -70,6 +71,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   position: relative;
   width: 315px;
   z-index: 10;
+  border-radius:12px;
 }
 .album-art {
   background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/incubus-make-yourself.jpg") center/cover no-repeat;
@@ -77,6 +79,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   position: relative;
   width: 315px;
   z-index: 10;
+  border-radius:12px;
 }
 
 .music-player-controls {
