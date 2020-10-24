@@ -15,7 +15,7 @@ $(document).ready(function() {
     genres.forEach(e => {
 
         var button = $('<button>');
-        button.text(e):
+        button.text(e);
         button.addClass("click");
         button.attr("data-genre", e);
         button.attr("id", e);
@@ -49,19 +49,39 @@ $(document).ready(function() {
 
     // function to undo
     $('#undo').on('click',function(){
+        if (lastClick != null) {
+            function isPicked(picked) { 
+                return picked.genre === lastClick;
+            }
+    
+            var picked = musicPref.find(isPicked);
+            var i = picked.index
 
-        function isPicked(picked) { 
-            return picked.genre === lastClick;
-        }
-
-        var picked = musicPref.find(isPicked);
-        var i = picked.index
-
-        musicPref[i].count--;
-
-        if(musicPref[i].count == 0) {
-            musicPref.splice(i,1)
-            prefIndex--;
+            var id = '#' + picked.genre
+    
+            if (musicPref[i].count === 3) {
+                $(id).attr("disabled", true);
+            }
+    
+            if (maxClicks === 5) {
+                $(".click").attr("disabled", false);
+            }
+    
+    
+            $(id).removeClass('medium')
+            $(id).removeClass('large')
+            $(id).removeClass('largest')
+    
+            musicPref[i].count--;
+    
+            if(musicPref[i].count == 0) {
+                musicPref.splice(i,1)
+                prefIndex--;
+            } else {
+                circleChange(picked.genre, id);    
+            }
+    
+            lastClick = null;
         }
     })
 
@@ -93,6 +113,7 @@ $(document).ready(function() {
                 }
             )
             prefIndex++;
+
         }
         else {
 
