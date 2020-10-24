@@ -1,6 +1,6 @@
 
-$(document).ready(function() {
-    var genres = ['rock','country','rap','R&B','Pop','Reggae'];
+$(document).ready(function () {
+    var genres = ['rock', 'country', 'rap', 'R&B', 'Pop', 'Reggae'];
     var maxedOut = [];
 
     //max counter per button
@@ -13,9 +13,9 @@ $(document).ready(function() {
 
 
     genres.forEach(e => {
-
+        
         var button = $('<button>');
-        button.text(e):
+        button.text(e);
         button.addClass("click");
         button.attr("data-genre", e);
         button.attr("id", e);
@@ -38,19 +38,18 @@ $(document).ready(function() {
 
         if (wasMaxed(genre)) {
             $(this).attr("disabled", true);
-        } else if (allMaxed()){
+        } else if (allMaxed()) {
             $(".click").attr("disabled", true);
         }
 
         // calls the styling of the clicked circles to change in size
         circleChange(genre, this);
-    })
-
+    });
 
     // function to undo
-    $('#undo').on('click',function(){
+    $('#undo').on('click', function () {
 
-        function isPicked(picked) { 
+        function isPicked(picked) {
             return picked.genre === lastClick;
         }
 
@@ -59,24 +58,20 @@ $(document).ready(function() {
 
         musicPref[i].count--;
 
-        if(musicPref[i].count == 0) {
-            musicPref.splice(i,1)
+        if (musicPref[i].count == 0) {
+            musicPref.splice(i, 1)
             prefIndex--;
         }
     })
 
-    $('#reset').on('click',function(){
+    $('#reset').on('click', function () {
         musicPref.length = 0
         prefIndex = 0
         maxedOut.length = 0
-
-    })
-
-
+    });
 
     //store preferences
     function trackPicks(genre) {
-        // var test = 'rock'
 
         function isPicked(picked) {
             return picked.genre === genre;
@@ -106,17 +101,17 @@ $(document).ready(function() {
 
     }
 
-    function wasMaxed(genre) {   
+    function wasMaxed(genre) {
         function isPicked(picked) {
             return picked.genre === genre;
         }
 
         var picked = musicPref.find(isPicked);
 
-        return(picked.count === genreMaxClicks);
+        return (picked.count === genreMaxClicks);
     }
 
-    function allMaxed(){
+    function allMaxed() {
         var tot = 0;
 
         musicPref.forEach(e => {
@@ -129,7 +124,7 @@ $(document).ready(function() {
 
     // function to handled the css
     function circleChange(genre, el) {
-        
+
         function isPicked(picked) {
             return picked.genre === genre;
         }
