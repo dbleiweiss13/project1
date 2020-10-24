@@ -16,7 +16,7 @@ $(document).ready(function() {
 
         var button = $('<button>');
         button.text(e);
-        button.addClass("click");
+        button.addClass("click small");
         button.attr("data-genre", e);
         button.attr("id", e);
         $("#btnDiv").append(button);
@@ -38,7 +38,9 @@ $(document).ready(function() {
 
         if (wasMaxed(genre)) {
             $(this).attr("disabled", true);
-        } else if (allMaxed()){
+        } 
+        
+        if (allMaxed()){
             $(".click").attr("disabled", true);
         }
 
@@ -61,6 +63,7 @@ $(document).ready(function() {
     
             if (musicPref[i].count === 3) {
                 $(id).attr("disabled", true);
+                maxedOut.splice(maxedOut.indexOf(picked.genre),1)
             }
     
             if (maxClicks === 5) {
@@ -75,11 +78,18 @@ $(document).ready(function() {
             musicPref[i].count--;
     
             if(musicPref[i].count == 0) {
+                $(id).addClass('small')
                 musicPref.splice(i,1)
                 prefIndex--;
             } else {
                 circleChange(picked.genre, id);    
             }
+
+            musicPref.forEach(e => {
+                if (e.count == 3) {
+                    $('#' + e.genre).attr("disabled", true);
+                }
+            });
     
             lastClick = null;
         }
@@ -90,9 +100,20 @@ $(document).ready(function() {
         prefIndex = 0
         maxedOut.length = 0
 
+        $('.click').removeClass('medium')
+        $('.click').removeClass('large')
+        $('.click').removeClass('largest')
+
+        $(".click").attr("disabled", false);
+
+        $('.click').addClass('small')
     })
 
+    $('#next').on('click',function(){
+        //save data to local storage
 
+        //navigate to the next page
+    })
 
     //store preferences
     function trackPicks(genre) {
@@ -158,6 +179,7 @@ $(document).ready(function() {
         var picked = musicPref.find(isPicked);
 
         if (picked.count == 1) {
+            $(el).removeClass("small");
             $(el).addClass("medium");
         }
         if (picked.count == 2) {
