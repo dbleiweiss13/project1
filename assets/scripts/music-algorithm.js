@@ -41,6 +41,12 @@ $(document).ready(function () {
     });
 });
 
+$.ajax({
+    url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
+    type: 'GET'  
+}).then( function(response){
+    console.log(response)
+})
 
 //function ajax call connect to API
 function getSong(artist) {
@@ -138,3 +144,41 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 
 //store favorites
+
+
+
+
+
+// window.onSpotifyWebPlaybackSDKReady = () => {
+//     const token = 'BQDsDC5WqWvf7QvxonS12-hq6DXLlmQkGnawFxDovG99LBMDRA3z50d0Evy9dryG3_bqAkYJcTY-JDJ9vPeCzY3GN015GqASfK2Q8OB6DGAu43yH6AgT3RQdCZR9myJVCHelhciNpb_c0lbeXvyJAJqrr_pKeG-dmOaE-A8lWvSW4pu2u1w';
+//     const player = new Spotify.Player({
+//       name: 'Web Playback SDK Quick Start Player',
+//       getOAuthToken: cb => { cb(token); }
+//     });
+
+//     // Error handling
+//     player.addListener('initialization_error', ({ message }) => { console.error(message); });
+//     player.addListener('authentication_error', ({ message }) => { console.error(message); });
+//     player.addListener('account_error', ({ message }) => { console.error(message); });
+//     player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+//     // Playback status updates
+//     player.addListener('player_state_changed', state => { console.log(state); });
+
+//     // Ready
+//     player.addListener('ready', ({ device_id }) => {
+//       console.log('Ready with Device ID', device_id);
+//     });
+
+//     // Not Ready
+//     player.addListener('not_ready', ({ device_id }) => {
+//       console.log('Device ID has gone offline', device_id);
+//     });
+
+//     // Connect to the player!
+//     player.connect();
+
+
+
+
+//   };
