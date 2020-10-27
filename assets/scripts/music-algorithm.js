@@ -48,6 +48,13 @@ $.ajax({
     console.log(response)
 })
 
+setSigninStatus()
+function setSigninStatus() {
+    var user = GoogleAuth.currentUser.get();
+    var isAuthorized = user.hasGrantedScopes(SCOPE);
+    console.log(isAuthorized)
+}
+
 //function ajax call connect to API
 function getSong(artist) {
     var accessToken = "BQBbkOf34lS1abRoKOQly3HCjfIufJatO5kag0urGP26_tjG12sKEiL6gL9c2kMr_vFdWr5hKMhE1EFFoEKNqH8h_MLSxFoE-DJAD9hVJcpy-61Gy27YojBWAPFxoFFkaz1lKeRgC6moIrp9c6zFnHj-6WPb1qw";
