@@ -48,6 +48,9 @@ $.ajax({
     console.log(response)
 })
 
+var GoogleAuth;
+    var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
+
 setSigninStatus()
 function setSigninStatus() {
     var user = GoogleAuth.currentUser.get();
