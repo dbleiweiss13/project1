@@ -62,7 +62,15 @@
         $('#revoke-access-button').css('display', 'inline-block');
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.');
-
+        
+            $('#test').on('click',function() {
+              $.ajax({
+                  url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
+                  type: 'GET'  
+              }).then( function(response){
+                  console.log(response)
+              })
+            })
             
       } else {
         $('#sign-in-or-out-button').html('Sign In/Authorize');
@@ -81,6 +89,10 @@
           style="margin-left: 25px">Sign In/Authorize</button>
   <button id="revoke-access-button"
           style="display: none; margin-left: 25px">Revoke access</button>
+
+  <button id="test">
+test
+  </button>
   
   <div id="auth-status" style="display: inline; padding-left: 25px"></div><hr>
   
