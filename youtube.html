@@ -62,16 +62,7 @@
         $('#revoke-access-button').css('display', 'inline-block');
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.');
-        
-            $('#test').on('click',function() {
-              $.ajax({
-                  url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
-                  type: 'GET'  
-              }).then( function(response){
-                  console.log(response)
-              })
-            })
-            
+
       } else {
         $('#sign-in-or-out-button').html('Sign In/Authorize');
         $('#revoke-access-button').css('display', 'none');
@@ -83,6 +74,16 @@
     function updateSigninStatus() {
       setSigninStatus();
     }
+
+
+    $('#test').on('click',function() {
+              $.ajax({
+                  url: 'https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.search.list?q=eminem&type=video',
+                  type: 'GET'  
+              }).then( function(response){
+                  console.log(response)
+              })
+            })
   </script>
   
   <button id="sign-in-or-out-button"
