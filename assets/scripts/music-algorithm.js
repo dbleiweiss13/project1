@@ -2,6 +2,8 @@
 var googleReady = false;
 var spodifyReady = false;
 
+var apikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+
 var GoogleAuth;
 var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
 function handleClientLoad() {
@@ -18,7 +20,7 @@ function initClient() {
     // Get API key and client ID from API Console.
     // 'scope' field specifies space-delimited list of access scopes.
     gapi.client.init({
-        'apiKey': 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4',
+        'apiKey': apikey,
         'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
         'discoveryDocs': [discoveryUrl],
         'scope': SCOPE
@@ -267,11 +269,23 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 function getVideo () {
     if (spodifyReady == true && googleReady == true) {
-        $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
-            type: 'GET'
-        }).then(function (response) {
-            console.log(response)
-        })
+        console.log(SCOPE)
+        console.log(GoogleAuth)
+        // $.ajax({
+        //     url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
+        //     type: 'GET',
+        //     Authorization: Bearer [YOUR_ACCESS_TOKEN],
+        //     Accept: application/json
+        // }).then(function (response) {
+        //     console.log(response)
+            
+        // })
     }
 }
+
+
+
+// GET https://youtube.googleapis.com/youtube/v3/search?q=eminem&type=video&key=[YOUR_API_KEY] HTTP/1.1
+
+// Authorization: Bearer [YOUR_ACCESS_TOKEN]
+// Accept: application/json
