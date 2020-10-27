@@ -15,8 +15,8 @@
       // Get API key and client ID from API Console.
       // 'scope' field specifies space-delimited list of access scopes.
       gapi.client.init({
-          'apiKey': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
-          'clientId': '4wm8cK7gXjZtxv5VSpclq8xO',
+          'apiKey': 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4',
+          'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
           'discoveryDocs': [discoveryUrl],
           'scope': SCOPE
       }).then(function () {
@@ -62,6 +62,8 @@
         $('#revoke-access-button').css('display', 'inline-block');
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.');
+
+            
       } else {
         $('#sign-in-or-out-button').html('Sign In/Authorize');
         $('#revoke-access-button').css('display', 'none');

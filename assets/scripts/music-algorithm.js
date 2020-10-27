@@ -74,7 +74,6 @@ function getSong(artist) {
                 },
                 success: function (data) {
                     var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
-
                     $.ajax({
                         url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
                         type: 'GET',
