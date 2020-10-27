@@ -134,17 +134,9 @@ $(document).ready(function () {
     });
 });
 
-$.ajax({
-    url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
-    type: 'GET'
-}).then(function (response) {
-    console.log(response)
-})
-
-
 //function ajax call connect to API
 function getSong(artist) {
-    var accessToken = "BQBbkOf34lS1abRoKOQly3HCjfIufJatO5kag0urGP26_tjG12sKEiL6gL9c2kMr_vFdWr5hKMhE1EFFoEKNqH8h_MLSxFoE-DJAD9hVJcpy-61Gy27YojBWAPFxoFFkaz1lKeRgC6moIrp9c6zFnHj-6WPb1qw";
+    var accessToken = "BQCQX5eu_T2kNu0lf4SmrMyQTD5zYH3Xg02cXoNTEF6JqvFIyjSbDtcmnYjWn1N6D0su-CaefUPbZQDNYTitRyUeDObfFU6rSSHaWerYvnU2XjJHScyjHBCbD2y7wLV3PmEBR8I1iLpM-RoKJZz2o9ppJeMycrw";
 
     var searchArtist = artist
 
@@ -275,6 +267,11 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 function getVideo () {
     if (spodifyReady == true && googleReady == true) {
-        console.log(true)
+        $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
+            type: 'GET'
+        }).then(function (response) {
+            console.log(response)
+        })
     }
 }
