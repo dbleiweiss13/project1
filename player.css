@@ -2,6 +2,7 @@
 *, *:before, *:after {
   box-sizing: border-box;
 }
+
 body {
 height: 200px;
 background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,143,1), rgba(255,218,185,1));
@@ -11,6 +12,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
 .music-player-container {
    
   transform: translate(-50%, -50%); 
+
   display: inline-block;
   height: 370px;
   position: absolute;
@@ -19,7 +21,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   top: 50%;
 }
 .music-player-container:after {
-  
+
   filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.8);
   bottom: -2px;
@@ -32,9 +34,11 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   width: 70%;
   z-index: 0;
 }
+
 .music-player {
   background-color: rgb(212, 220, 192);
   border-radius: 12px;
+
   height: 370px;
   padding: 40px 250px 40px 40px;
   position: absolute;
@@ -42,27 +46,32 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   width: 460px;
   z-index: 3;
 }
+
 .player-content-container {
   
   transform: translateY(-50%);
   top: 50%;
   position: relative;
 }
+
 .artist-name {
   font-size: 28px;
   font-weight: normal;
   margin: 0 0 0.75em 0;
 }
+
 .album-title {
   font-weight: 200;
   font-size: 24px;
   margin: 0 0 1.75em 0;
 }
+
 .song-title {
   font-size: 18px;
   font-weight: 200;
   margin: 0 0 1.5em 0;
 }
+
 .album {
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.65);
   height: 315px;
@@ -73,12 +82,14 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   z-index: 10;
   border-radius:12px;
 }
+
 .album-art {
   background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/incubus-make-yourself.jpg") center/cover no-repeat;
   height: 315px;
   position: relative;
   width: 315px;
   z-index: 10;
+
   border-radius:12px;
 }
 
@@ -103,3 +114,4 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
 .control-fav {
   background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/backwards.svg") center/cover no-repeat;
 }
+
