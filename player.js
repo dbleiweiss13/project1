@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $('.carousel').carousel();
+    // coursel initialization
+
+
     // play song function 
     // function play() {
     //     var playButton = $("#playBtn");

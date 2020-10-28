@@ -17,6 +17,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   min-width: 460px;
   left: 50%;
   top: 30%;
+  
 }
 .music-container:after {
   filter: blur(8px);
@@ -116,7 +117,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   display: none;
 }
 
-footer {
+/* footer {
   position: fixed;
     bottom: 0;
     width: 100%;
@@ -129,8 +130,14 @@ footer {
   height: 200px;
   border-radius: 12px;
   
-}
+} */
 
+.carousel{
+  position: fixed;
+  bottom: 0;
+  top: 50%;
+
+}
 img{
   border-radius: 12px;
 }
