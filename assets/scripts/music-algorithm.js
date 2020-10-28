@@ -269,17 +269,15 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 function getVideo () {
     if (spodifyReady == true && googleReady == true) {
-        console.log(SCOPE)
-        console.log(GoogleAuth)
-        // $.ajax({
-        //     url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
-        //     type: 'GET',
-        //     Authorization: Bearer [YOUR_ACCESS_TOKEN],
-        //     Accept: application/json
-        // }).then(function (response) {
-        //     console.log(response)
+        $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
+            type: 'GET',
+            Authorization: Bearer [gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token],
+            Accept: application/json
+        }).then(function (response) {
+            console.log(response)
             
-        // })
+        })
     }
 }
 
