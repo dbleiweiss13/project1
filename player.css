@@ -81,7 +81,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
 }
 
 .album-art {
-  background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/incubus-make-yourself.jpg") center/cover no-repeat;
+  background: #fff center/cover no-repeat;
   height: 315px;
   position: relative;
   width: 315px;
@@ -115,3 +115,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
 .hide{
   display: none;
 }
+
+
+/* in .album-art
+url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/incubus-make-yourself.jpg") */
