@@ -138,7 +138,7 @@ $(document).ready(function () {
 
 //function ajax call connect to API
 function getSong(artist) {
-    var accessToken = "BQCQX5eu_T2kNu0lf4SmrMyQTD5zYH3Xg02cXoNTEF6JqvFIyjSbDtcmnYjWn1N6D0su-CaefUPbZQDNYTitRyUeDObfFU6rSSHaWerYvnU2XjJHScyjHBCbD2y7wLV3PmEBR8I1iLpM-RoKJZz2o9ppJeMycrw";
+    var accessToken = "BQAB9eju5r3Gba0zLk2qnTnqTO8TCx3AMQDNYivruFFq8CPYiE6rjm66sk_dVHFlgkyCcCiKda7UQWF4rdFVH34QDZjqOPRg4xFEPZZ3UAtJ6KcpLTHK-GpVtRnm1DNES7y829ExeF-8qPYDRxTbQRdg_rZtbYU";
 
     var searchArtist = artist
 
