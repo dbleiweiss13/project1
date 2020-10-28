@@ -68,7 +68,7 @@ function setSigninStatus() {
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.');
         googleReady = true;
-        console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
+        // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
         getVideo ()
     } else {
         $('#sign-in-or-out-button').html('Sign In/Authorize');
@@ -172,7 +172,7 @@ function getSong(artist) {
                         },
                         success: function (data) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
-                            console.log(data.tracks[trackSelect])
+                            // console.log(data.tracks[trackSelect])
                             spodifyReady = true;
                             getVideo ()
                         }
@@ -193,7 +193,7 @@ function getArtist() {
         }
     })
 
-    console.log(genrePickArray)
+    // console.log(genrePickArray)
 
     var genreRand = genrePickArray[Math.floor(Math.random() * genrePickArray.length)]
     var pickedArtist = ''
