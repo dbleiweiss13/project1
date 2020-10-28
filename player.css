@@ -16,7 +16,7 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   position: absolute;
   min-width: 460px;
   left: 50%;
-  top: 50%;
+  top: 30%;
 }
 .music-container:after {
   filter: blur(8px);
@@ -116,6 +116,18 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
   display: none;
 }
 
+footer {
+  position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-left: 100px;
+    
+}
+
+.card{
+  width: 200px;
+  height: 200px;
+}
 
 /* in .album-art
 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/incubus-make-yourself.jpg") */

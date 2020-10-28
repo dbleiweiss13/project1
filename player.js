@@ -32,11 +32,17 @@ $(document).ready(function () {
     // var favSongs = [];
     // favSongs[0]= prompt("Save to favorites?");
     var favButton = $("#favBtn");
+    var favSongs = JSON.parse(localStorage.getItem("favSongs"));
+    if (favSongs == null) {
+        favSongs = [];
+    }
 
 
     favButton.on("click", function () {
-        var favSongs = [];
-        favSongs[0] = confirm("Save to favorites?");
+        // var favSongs = [];
+        // var newFavSong = localStorage.setItem("favSongs", JSON.stringify($(".artist-name")));
+        var newFavSong = $(".artist-name").text();
+        favSongs.push(newFavSong);
         localStorage.setItem("favSongs", JSON.stringify(favSongs));
 
         // local storage function works however we arent allowed to use confirms,alerts, or prompts, so no idea how to use this for now without woring API
