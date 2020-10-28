@@ -4,16 +4,18 @@ background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,14
 }
 
 .card-panel{
-    width: 25%;  
+    width: 25%; 
+    background-color: rgb(212, 220, 192); 
+    border-radius: 15px;
 }
 
-.container{
+.container {
 display: flex;   
 justify-content: center; 
 }
 
 h6{
-    color: white;
+    color: black;
 }
 
 .medium {
@@ -46,6 +48,7 @@ button {
     height: 70px;
     border-radius: 50%;
     margin: 30px;
+    background-color:rgb(212, 220, 192);
 }
 
 #undo-reset-next {
@@ -79,4 +82,7 @@ button {
 
 #chooseText {
     text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+
 }
