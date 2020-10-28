@@ -68,6 +68,7 @@ function setSigninStatus() {
         $('#auth-status').html('You are currently signed in and have granted ' +
             'access to this app.');
         googleReady = true;
+        console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
         getVideo ()
     } else {
         $('#sign-in-or-out-button').html('Sign In/Authorize');
@@ -138,6 +139,7 @@ $(document).ready(function () {
 
 //function ajax call connect to API
 function getSong(artist) {
+    // access token 
     var accessToken = "BQAB9eju5r3Gba0zLk2qnTnqTO8TCx3AMQDNYivruFFq8CPYiE6rjm66sk_dVHFlgkyCcCiKda7UQWF4rdFVH34QDZjqOPRg4xFEPZZ3UAtJ6KcpLTHK-GpVtRnm1DNES7y829ExeF-8qPYDRxTbQRdg_rZtbYU";
 
     var searchArtist = artist
@@ -226,9 +228,6 @@ function artistFromObj(genre) {
     return (artists[genre][Math.floor(Math.random() * artists[genre].length)])
 }
 
-
-var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
-
 //store history
 
 
@@ -276,6 +275,7 @@ function getVideo () {
             Accept: application/json
         }).then(function (response) {
             console.log(response)
+            
             
         })
     }
