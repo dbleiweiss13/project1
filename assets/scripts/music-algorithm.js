@@ -268,7 +268,7 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 
 function getVideo () {
-    if (googleReady == true) {
+    if (spodifyReady == true && googleReady == true) {
         $.ajax({
             url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
             type: 'GET',
