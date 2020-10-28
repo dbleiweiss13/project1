@@ -11,6 +11,16 @@ $(document).ready(function () {
     var musicPref = [];
     var prefIndex = 0;
 
+// variable to decremennt 
+var count = 5
+var counterEl = document.querySelector("#counter");
+
+    //function  to decrement counter
+    function setCounterText(){
+        counterEl.textContent = count;
+        count--;
+    };
+
 
     genres.forEach(e => {
 
@@ -41,6 +51,9 @@ $(document).ready(function () {
 
         // calls the styling of the clicked circles to change in size
         circleChange(genre, this);
+
+        // function to decrement counter on each click not working fully well
+        setCounterText();
     });
 
     // function to undo

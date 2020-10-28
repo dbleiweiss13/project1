@@ -1,3 +1,21 @@
+body{
+height: 200px;
+background-image: linear-gradient(to right, rgba(202,130,101,1), rgba(229,174,143,1), rgba(255,218,185,1));
+}
+
+.card-panel{
+    width: 25%;  
+}
+
+.container{
+display: flex;   
+justify-content: center; 
+}
+
+h6{
+    color: white;
+}
+
 .medium {
     font-size: 30px;
     width: 120px;
@@ -54,8 +72,8 @@ button {
 }
 
 #chooseTitle {
-    font-weight: 500;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 600;
+    font-family:'Catamaran', sans-serif;
     text-align: center;
 }
 
