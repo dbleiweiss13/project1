@@ -127,6 +127,12 @@ footer {
 .card{
   width: 200px;
   height: 200px;
+  border-radius: 12px;
+  
+}
+
+img{
+  border-radius: 12px;
 }
 
 /* in .album-art
