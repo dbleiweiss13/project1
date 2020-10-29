@@ -17,8 +17,20 @@ var counterEl = document.querySelector("#counter");
 
     //function  to decrement counter
     function setCounterText(){
-        counterEl.textContent = count;
         count--;
+        counterEl.textContent = count;
+    };
+
+    //increment
+    function undoGenrePick() {
+        ++count;
+        counterEl.textContent = count;
+    }
+
+    //function to reset
+    function resetCounter(){
+        count = 5;
+        counterEl.textContent = count;
     };
 
 
@@ -96,6 +108,7 @@ var counterEl = document.querySelector("#counter");
                     $('#' + e.genre).attr("disabled", true);
                 }
             });
+            undoGenrePick();
 
             lastClick = null;
             wasMaxed(genre);
@@ -115,7 +128,10 @@ var counterEl = document.querySelector("#counter");
         $(".click").attr("disabled", false);
 
         $('.click').addClass('small');
+
+        resetCounter();
     })
+    
 
     //store preferences
     function trackPicks(genre) {
