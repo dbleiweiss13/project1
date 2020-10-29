@@ -1,11 +1,64 @@
 .medium {
     font-size: 30px;
+    width: 120px;
+    height: 120px;
 }
 
 .large {
     font-size: 40px;
+    width: 180px;
+    height: 180px;
 }
 
 .largest {
     font-size: 50px;
+    width: 240px;
+    height: 240px;
+}
+
+#btnDiv {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+button {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 30px;
+}
+
+#undo-reset-next {
+    width: 7.5%;
+    margin: auto;
+}
+
+#undo {
+    border-radius: 20px;
+    width: 60px;
+    height: 30px;
+}
+
+#reset {
+    border-radius: 20px;
+    width: 60px;
+    height: 30px;
+}
+
+#next {
+    border-radius: 0;
+    width: 60px;
+    height: 30px;
+}
+
+#chooseTitle {
+    font-weight: 500;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+
+#chooseText {
+    text-align: center;
 }
