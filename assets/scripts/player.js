@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.carousel').carousel();
+    var carsousel = $('.carousel');
     // coursel initialization
 
 
