@@ -148,6 +148,8 @@ $(document).ready(function () {
         } else {
             $(this).attr("disabled", false);
         }
+
+        console.log(musicPref)
     }
 
     function allMaxed() {

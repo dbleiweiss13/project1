@@ -1,41 +1,140 @@
-var favorites = [];
+//get data from local storage
+var musicPreferences = JSON.parse(localStorage.getItem("prefs"));
 
-var genreIds = {
-    Rock: "0C0XlULifJtAgn6ZNCW2eu",
-    Country: "32vWCbZh0xZ4o9gkz4PsEU",
-    Rap: "7dGJo4pcD2V6oG8kP0tJRR",
-    R_and_B: "6vWDO969PvNqNYHIOW5v0m",
-    Pop: "5o723EMxNulM5ydXRh7Qkk",
-    Reggae: "2QsynagSdAqZj3U9HgDzjD"
-};
-
-function onLoad() {
-    var accessToken = "BQAA18qHArTOf_OOk9mF5QbDdWzDYp1SwoGVHUXKEqPDE8wty6j9xBmf_wwswqKNBXe6jbbfHrLtEPY6bf5WKrM1J_nY6vOUAcJsq_NjmCU-p_sxGbL0l4QvOBcjipg01OUZ98A_jQDtj7LVx1WKMSh9nrZanxj5ihJtk2HBvMs0BUIITQkQsTvWDZz9ENzql-I9kM8B0U71etW-sVO89xC68OOpzvXbSNTe59H6eGQH1BAJaPxEpQOp-NXQQG8"
-    var arr = JSON.parse(localStorage.getItem("prefs"));
-    
-    var genre = arr[Math.floor(Math.random() * arr.length)].genre;
-    var id = genreIds[genre];
-
-    $.ajax({
-        url: 'https://api.spotify.com/v1/artists/' + id + '/related-artists',
-        type: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
-        success: function (data) {
-            console.log(data);
-        }
-    });
+var artists = {
+    rock: [
+        'Rolling Stones'
+    ],
+    rap: [
+        'Eminem'
+    ],
+    country: [
+        'Willie Nelson'
+    ],
+    rb: [
+        'Drake'
+    ],
+    pop: [
+        'Beyonce'
+    ],
+    reggae: [
+        'Bob Marley'
+    ]
 }
 
-// call this on its own using document.ready
-$(document).ready(onLoad);
+// console.log(musicPreferences)
 
-// rest of the app runs inside this document.ready
 $(document).ready(function () {
+    //create function to pick genre and related artist of next song 
+    // console.log(getArtist());
+
+    //function will return song from artist name
+    getSong(getArtist())
+
+    $('#next').on('click',function(){
+        getSong(getArtist())
+    })
+
     $("#favs").on("click", function () {
         favorites.push($(this).attr("data-songName"));
         localStorage.setItem("favs", JSON.stringify(favorites));
     });
 });
 
+
+//function ajax call connect to API
+function getSong(artist) {
+    var accessToken = "BQBbkOf34lS1abRoKOQly3HCjfIufJatO5kag0urGP26_tjG12sKEiL6gL9c2kMr_vFdWr5hKMhE1EFFoEKNqH8h_MLSxFoE-DJAD9hVJcpy-61Gy27YojBWAPFxoFFkaz1lKeRgC6moIrp9c6zFnHj-6WPb1qw";
+
+    var searchArtist = artist
+
+    //get artist id using spodify search api
+    $.ajax({
+        url: 'https://api.spotify.com/v1/search?q=' + searchArtist + '&type=artist&limit=1',
+        type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
+        success: function (data) {
+            var artistID = data.artists.items[0].id
+            // console.log(artistID)
+
+            // get related artists using spodify artist api
+            $.ajax({
+                url: 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                success: function (data) {
+                    var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
+
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        success: function (data) {
+                            var trackSelect = Math.floor(Math.random() * data.tracks.length)
+                            console.log(data.tracks[trackSelect])
+                        }
+                    });
+
+                }
+            });
+
+        }
+    });
+}
+
+function getArtist () {
+    var genrePickArray = []
+    musicPreferences.forEach(e => {
+        for(var i = 0; i < e.count; i++) {
+            genrePickArray.push(e.genre)
+        }
+    })
+
+    console.log(genrePickArray)
+
+    var genreRand = genrePickArray[Math.floor(Math.random() * genrePickArray.length)]
+    var pickedArtist = ''
+
+    if (genreRand == 'Rock') {
+        pickedArtist = artistFromObj('rock')
+    }
+    else if (genreRand == 'Country') {
+        pickedArtist = artistFromObj('country')
+    }
+    else if (genreRand == 'Rap') {
+        pickedArtist = artistFromObj('rap')
+    }
+    else if (genreRand == 'R&B') {
+        pickedArtist = artistFromObj('rb')
+    }
+    else if (genreRand == 'Pop') {
+        pickedArtist = artistFromObj('pop')
+    }
+    else if (genreRand == 'Reggae') {
+        pickedArtist = artistFromObj('reggae')
+    }
+    else {
+        console.log('error picking artist')
+        return(null)
+    }
+
+    return(pickedArtist)
+}
+
+function artistFromObj (genre) {
+    return(artists[genre][Math.floor(Math.random() * artists[genre].length)])
+}
+
+
+var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
+
+//store history
+
+
+//store favorites
