@@ -1,3 +1,99 @@
+
+var googleReady = false;
+var spodifyReady = false;
+
+var apikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+
+var GoogleAuth;
+var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
+function handleClientLoad() {
+    // Load the API's client and auth2 modules.
+    // Call the initClient function after the modules load.
+    gapi.load('client:auth2', initClient);
+}
+
+function initClient() {
+    // In practice, your app can retrieve one or more discovery documents.
+    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
+
+    // Initialize the gapi.client object, which app uses to make API requests.
+    // Get API key and client ID from API Console.
+    // 'scope' field specifies space-delimited list of access scopes.
+    gapi.client.init({
+        'apiKey': apikey,
+        'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
+        'discoveryDocs': [discoveryUrl],
+        'scope': SCOPE
+    }).then(function () {
+        GoogleAuth = gapi.auth2.getAuthInstance();
+
+        // Listen for sign-in state changes.
+        GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+        // Handle initial sign-in state. (Determine if user is already signed in.)
+        var user = GoogleAuth.currentUser.get();
+        setSigninStatus();
+
+        // Call handleAuthClick function when user clicks on
+        //      "Sign In/Authorize" button.
+        $('#sign-in-or-out-button').click(function () {
+            handleAuthClick();
+        });
+        $('#revoke-access-button').click(function () {
+            revokeAccess();
+        });
+    });
+}
+
+function handleAuthClick() {
+    if (GoogleAuth.isSignedIn.get()) {
+        // User is authorized and has clicked "Sign out" button.
+        GoogleAuth.signOut();
+    } else {
+        // User is not signed in. Start Google auth flow.
+        GoogleAuth.signIn();
+    }
+}
+
+function revokeAccess() {
+    GoogleAuth.disconnect();
+}
+
+function setSigninStatus() {
+    var user = GoogleAuth.currentUser.get();
+    var isAuthorized = user.hasGrantedScopes(SCOPE);
+    if (isAuthorized) {
+        $('#sign-in-or-out-button').html('Sign out');
+        $('#revoke-access-button').css('display', 'inline-block');
+        $('#auth-status').html('You are currently signed in and have granted ' +
+            'access to this app.');
+        googleReady = true;
+        // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
+        getVideo ()
+    } else {
+        $('#sign-in-or-out-button').html('Sign In/Authorize');
+        $('#revoke-access-button').css('display', 'none');
+        $('#auth-status').html('You have not authorized this app or you are ' +
+            'signed out.');
+    }
+}
+
+function updateSigninStatus() {
+    setSigninStatus();
+}
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+
+
+
 //get data from local storage
 var musicPreferences = JSON.parse(localStorage.getItem("prefs"));
 
@@ -31,7 +127,7 @@ $(document).ready(function () {
     //function will return song from artist name
     getSong(getArtist())
 
-    $('#next').on('click',function(){
+    $('#next').on('click', function () {
         getSong(getArtist())
     })
 
@@ -41,17 +137,10 @@ $(document).ready(function () {
     });
 });
 
-$.ajax({
-    url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video',
-    type: 'GET'  
-}).then( function(response){
-    console.log(response)
-})
-
-
 //function ajax call connect to API
 function getSong(artist) {
-    var accessToken = "BQBbkOf34lS1abRoKOQly3HCjfIufJatO5kag0urGP26_tjG12sKEiL6gL9c2kMr_vFdWr5hKMhE1EFFoEKNqH8h_MLSxFoE-DJAD9hVJcpy-61Gy27YojBWAPFxoFFkaz1lKeRgC6moIrp9c6zFnHj-6WPb1qw";
+    // access token 
+    var accessToken = "BQAB9eju5r3Gba0zLk2qnTnqTO8TCx3AMQDNYivruFFq8CPYiE6rjm66sk_dVHFlgkyCcCiKda7UQWF4rdFVH34QDZjqOPRg4xFEPZZ3UAtJ6KcpLTHK-GpVtRnm1DNES7y829ExeF-8qPYDRxTbQRdg_rZtbYU";
 
     var searchArtist = artist
 
@@ -83,7 +172,9 @@ function getSong(artist) {
                         },
                         success: function (data) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
-                            console.log(data.tracks[trackSelect])
+                            // console.log(data.tracks[trackSelect])
+                            spodifyReady = true;
+                            getVideo ()
                         }
                     });
 
@@ -94,15 +185,15 @@ function getSong(artist) {
     });
 }
 
-function getArtist () {
+function getArtist() {
     var genrePickArray = []
     musicPreferences.forEach(e => {
-        for(var i = 0; i < e.count; i++) {
+        for (var i = 0; i < e.count; i++) {
             genrePickArray.push(e.genre)
         }
     })
 
-    console.log(genrePickArray)
+    // console.log(genrePickArray)
 
     var genreRand = genrePickArray[Math.floor(Math.random() * genrePickArray.length)]
     var pickedArtist = ''
@@ -127,26 +218,20 @@ function getArtist () {
     }
     else {
         console.log('error picking artist')
-        return(null)
+        return (null)
     }
 
-    return(pickedArtist)
+    return (pickedArtist)
 }
 
-function artistFromObj (genre) {
-    return(artists[genre][Math.floor(Math.random() * artists[genre].length)])
+function artistFromObj(genre) {
+    return (artists[genre][Math.floor(Math.random() * artists[genre].length)])
 }
-
-
-var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 
 //store history
 
 
 //store favorites
-
-
-
 
 
 // window.onSpotifyWebPlaybackSDKReady = () => {
@@ -178,84 +263,27 @@ var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
 //     // Connect to the player!
 //     player.connect();
 
-
-
-
 //   };
 
 
-var GoogleAuth;
-    var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
-    function handleClientLoad() {
-      // Load the API's client and auth2 modules.
-      // Call the initClient function after the modules load.
-      gapi.load('client:auth2', initClient);
+function getVideo () {
+    if (spodifyReady == true && googleReady == true) {
+        $.ajax({
+            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
+            type: 'GET',
+            Authorization: Bearer [gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token],
+            Accept: application/json
+        }).then(function (response) {
+            console.log(response)
+            
+            
+        })
     }
-  
-    function initClient() {
-      // In practice, your app can retrieve one or more discovery documents.
-      var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest';
-  
-      // Initialize the gapi.client object, which app uses to make API requests.
-      // Get API key and client ID from API Console.
-      // 'scope' field specifies space-delimited list of access scopes.
-      gapi.client.init({
-          'apiKey': 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4',
-          'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
-          'discoveryDocs': [discoveryUrl],
-          'scope': SCOPE
-      }).then(function () {
-        GoogleAuth = gapi.auth2.getAuthInstance();
-  
-        // Listen for sign-in state changes.
-        GoogleAuth.isSignedIn.listen(updateSigninStatus);
-  
-        // Handle initial sign-in state. (Determine if user is already signed in.)
-        var user = GoogleAuth.currentUser.get();
-        setSigninStatus();
-  
-        // Call handleAuthClick function when user clicks on
-        //      "Sign In/Authorize" button.
-        $('#sign-in-or-out-button').click(function() {
-          handleAuthClick();
-        });
-        $('#revoke-access-button').click(function() {
-          revokeAccess();
-        });
-      });
-    }
-  
-    function handleAuthClick() {
-      if (GoogleAuth.isSignedIn.get()) {
-        // User is authorized and has clicked "Sign out" button.
-        GoogleAuth.signOut();
-      } else {
-        // User is not signed in. Start Google auth flow.
-        GoogleAuth.signIn();
-      }
-    }
-  
-    function revokeAccess() {
-      GoogleAuth.disconnect();
-    }
-  
-    function setSigninStatus() {
-      var user = GoogleAuth.currentUser.get();
-      var isAuthorized = user.hasGrantedScopes(SCOPE);
-      if (isAuthorized) {
-        $('#sign-in-or-out-button').html('Sign out');
-        $('#revoke-access-button').css('display', 'inline-block');
-        $('#auth-status').html('You are currently signed in and have granted ' +
-            'access to this app.');
+}
 
-      } else {
-        $('#sign-in-or-out-button').html('Sign In/Authorize');
-        $('#revoke-access-button').css('display', 'none');
-        $('#auth-status').html('You have not authorized this app or you are ' +
-            'signed out.');
-      }
-    }
-  
-    function updateSigninStatus() {
-      setSigninStatus();
-    }
+
+
+// GET https://youtube.googleapis.com/youtube/v3/search?q=eminem&type=video&key=[YOUR_API_KEY] HTTP/1.1
+
+// Authorization: Bearer [YOUR_ACCESS_TOKEN]
+// Accept: application/json
