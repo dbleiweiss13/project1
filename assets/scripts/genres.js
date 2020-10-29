@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
+    var genres = ['Rock', 'Country', 'Rap', 'RnB', 'Pop', 'Reggae'];
     var maxedOut = [];
 
     //max counter per button
@@ -10,6 +10,28 @@ $(document).ready(function () {
 
     var musicPref = [];
     var prefIndex = 0;
+
+// variable to decremennt 
+var count = 5
+var counterEl = document.querySelector("#counter");
+
+    //function  to decrement counter
+    function setCounterText(){
+        count--;
+        counterEl.textContent = count;
+    };
+
+    //increment
+    function undoGenrePick() {
+        ++count;
+        counterEl.textContent = count;
+    }
+
+    //function to reset
+    function resetCounter(){
+        count = 5;
+        counterEl.textContent = count;
+    };
 
 
     genres.forEach(e => {
@@ -41,6 +63,9 @@ $(document).ready(function () {
 
         // calls the styling of the clicked circles to change in size
         circleChange(genre, this);
+
+        // function to decrement counter on each click not working fully well
+        setCounterText();
     });
 
     // function to undo
@@ -83,6 +108,7 @@ $(document).ready(function () {
                     $('#' + e.genre).attr("disabled", true);
                 }
             });
+            undoGenrePick();
 
             lastClick = null;
             wasMaxed(genre);
@@ -102,7 +128,10 @@ $(document).ready(function () {
         $(".click").attr("disabled", false);
 
         $('.click').addClass('small');
+
+        resetCounter();
     })
+    
 
     //store preferences
     function trackPicks(genre) {
