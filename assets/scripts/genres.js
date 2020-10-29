@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
+    var genres = ['Rock', 'Country', 'Rap', 'RnB', 'Pop', 'Reggae'];
     var maxedOut = [];
 
     //max counter per button
