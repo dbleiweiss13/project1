@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./player.css">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div class="music-container is-playing">
+    <div class="music-player">
+      <div class="player-content-container">
+        <!-- artist name would go here -->
+        <h1 class="artist-name">Incubus</h1>
+
+
+        <h2 class="album-title">Make Yourself</h2>
+        <h3 class="song-title">"Stellar"</h3>
+        <div class="music-player-controls">
+          <a class="btn-floating btn-large waves-effect cyan" id="playBtn"><i class="material-icons">play_arrow</i></a>
+          <a class="btn-floating btn-large waves-effect cyan hide" id="pauseBtn"><i class="material-icons">pause</i></a>
+          <a class="btn-floating btn-large waves-effect cyan" id="fastBtn"><i
+              class="material-icons">fast_forward</i></a>
+          <a class="btn-floating btn-large waves-effect waves-light red" id="favBtn"><i
+              class="material-icons">favorite</i></a>
+
+        </div>
+      </div>
+    </div>
+    <div class="album">
+      <div class="album-art"></div><!--  /.album-art -->
+
+    </div>
+  </div>
+  </br>
+
+  <!-- add some data-genres to carousel -->
+  <footer>
+    <div class="carousel">
+      <a class="carousel-item" href="#one!"><img src="assets/images/country.jpg"></a>
+      <a class="carousel-item" href="#two!"><img src="assets/images/pop1.jpg"></a>
+      <a class="carousel-item" href="#three!"><img src="assets/images/rap.jpg"></a>
+      <a class="carousel-item" href="#four!"><img src="assets/images/rnb.jpg"></a>
+      <a class="carousel-item" href="#five!"><img src="assets/images/rock.jpeg"></a>
+    </div>
+  </footer>
+  <!-- footer containing cards that will hold genre playlists so the user can click them and then switch to that genre -->
+  <!-- these all hold default images for now, may change them  -->
+  <!-- <footer>
+    <div class="row">  -->
+      <!-- 1st genre -->
+      <!-- <div class="col md-3 mb-3">
+        <div class="card">
+          <div class="card-image">
+            <img src="assets/images/rock.jpeg" alt="image of album">
+
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                class="material-icons">play_arrow</i></a>
+          </div>
+
+        </div>
+      </div>  -->
+
+      <!-- 2nd genre -->
+      <!-- <div class="col md-3 mb-3">
+        <div class="card">
+          <div class="card-image">
+            <img src="assets/images/rap.jpg" alt="image of album">
+
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                class="material-icons">play_arrow</i></a>
+          </div>
+
+        </div>
+      </div> -->
+
+      <!-- 3rd genre -->
+      <!-- <div class="col md-3 mb-3">
+        <div class="card">
+          <div class="card-image">
+            <img src="assets/images/country.jpg" alt="image of album">
+
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                class="material-icons">play_arrow</i></a>
+          </div>
+
+        </div>
+      </div> -->
+
+      <!-- 4th genre -->
+      <!-- <div class="col md-3 mb-3">
+        <div class="card">
+          <div class="card-image">
+            <img src="assets/images/rnb.jpg" alt="image of album">
+
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                class="material-icons">play_arrow</i></a>
+          </div>
+
+        </div>
+      </div> -->
+
+      <!-- 5th genre -->
+      <!-- <div class="col md-3 mb-3">
+        <div class="card">
+          <div class="card-image">
+            <img src="assets/images/pop1.jpg" alt="image of album">
+
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                class="material-icons">play_arrow</i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="./player.js"></script>
+</body>
+
+</html>
