@@ -3,7 +3,7 @@ var googleReady = false;
 var spodifyReady = false;
 
 // access token fir spodify
-var spodifyAccessToken = "BQDplo5RpGMKGSbbG5lGkSSowkS7hJqopJfKukas_jvFI3LwjFg5HncNZBbGeHhX3dnEkmBxp4f7c5TEYp1hhD7qk2e0WhzPLEDCDESHMmfTNeaw8vgES7gSvESQkUdi2agFO_lMwyWLHkiAzc97C5k6XrD9y-U";
+var spodifyAccessToken = "BQC5k9_RcV5u5pIYVXT1Utwe-qiH3dg6wcUT6jqBHdOh-ffaXZqz86vVUkqW0eDfl6GqiLd1yG0sxqDf0gGL3QgFeahLOLJBU1zbMJeyVN7ECSrmsz6oht5rx1C1vGdIpGjTpe5ZJIucBSqOikfxDQhMO-8RBbM";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
