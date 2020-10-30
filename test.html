@@ -11,10 +11,13 @@
     <link rel="stylesheet" href="assets/CSS/style.css">
     <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
     <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
 </head>
 
 
 <body> 
+    <button onclick="authenticate().then(loadClient)">authorize and load</button>
 
     <script src="./assets/scripts/music-algorithm.js"></script>
     <script async defer src="https://apis.google.com/js/api.js"

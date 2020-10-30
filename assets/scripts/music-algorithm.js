@@ -2,7 +2,51 @@
 var googleReady = false;
 var spodifyReady = false;
 
-var apikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+// access token 
+var spodifyAccessToken = "BQA9rFpBjD0lT9NVe176l8qtr49nfvF5udIDQakv9X4McV4kQxWQGNfHCNt0Kg-Y01oiPvdTrN8Fkj6n-JrMCaQmJKus0uzrx2N1y-tdsKhwCV3neCYR-yeTu4v2pqmfxSIQHc7QloYZDtSBSPRWXMwpLqycZEk";
+
+//google keys
+var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+var googleClientID = '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com'
+
+
+//   /**
+//    * Sample JavaScript code for youtube.search.list
+//    * See instructions for running APIs Explorer code samples locally:
+//    * https://developers.google.com/explorer-help/guides/code_samples#javascript
+//    */
+
+//   function authenticate() {
+//     return gapi.auth2.getAuthInstance()
+//         .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+//         .then(function() { console.log("Sign-in successful"); },
+//               function(err) { console.error("Error signing in", err); });
+//   }
+//   function loadClient() {
+//     gapi.client.setApiKey(googleApikey);
+//     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+//         .then(function() { console.log("GAPI client loaded for API"); },
+//               function(err) { console.error("Error loading GAPI client for API", err); });
+//   }
+//   // Make sure the client is loaded and sign-in is complete before calling this method.
+//   function execute() {
+//     return gapi.client.youtube.search.list({
+//       "q": "elvis",
+//       "type": [
+//         "video"
+//       ]
+//     })
+//         .then(function(response) {
+//                 // Handle the results here (response.result has the parsed body).
+//                 console.log("Response", response);
+//               },
+//               function(err) { console.error("Execute error", err); });
+//   }
+//   gapi.load("client:auth2", function() {
+//     gapi.auth2.init({client_id: googleClientID});
+//   });
+
+
 
 var GoogleAuth;
 var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
@@ -20,7 +64,7 @@ function initClient() {
     // Get API key and client ID from API Console.
     // 'scope' field specifies space-delimited list of access scopes.
     gapi.client.init({
-        'apiKey': apikey,
+        'apiKey': googleApikey,
         'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
         'discoveryDocs': [discoveryUrl],
         'scope': SCOPE
@@ -139,9 +183,7 @@ $(document).ready(function () {
 
 //function ajax call connect to API
 function getSong(artist) {
-    // access token 
-    var accessToken = "BQAB9eju5r3Gba0zLk2qnTnqTO8TCx3AMQDNYivruFFq8CPYiE6rjm66sk_dVHFlgkyCcCiKda7UQWF4rdFVH34QDZjqOPRg4xFEPZZ3UAtJ6KcpLTHK-GpVtRnm1DNES7y829ExeF-8qPYDRxTbQRdg_rZtbYU";
-
+    
     var searchArtist = artist
 
     //get artist id using spodify search api
@@ -149,7 +191,7 @@ function getSong(artist) {
         url: 'https://api.spotify.com/v1/search?q=' + searchArtist + '&type=artist&limit=1',
         type: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + accessToken
+            'Authorization': 'Bearer ' + spodifyAccessToken
         },
         success: function (data) {
             var artistID = data.artists.items[0].id
@@ -160,7 +202,7 @@ function getSong(artist) {
                 url: 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists',
                 type: 'GET',
                 headers: {
-                    'Authorization': 'Bearer ' + accessToken
+                    'Authorization': 'Bearer ' + spodifyAccessToken
                 },
                 success: function (data) {
                     var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
@@ -168,7 +210,7 @@ function getSong(artist) {
                         url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
                         type: 'GET',
                         headers: {
-                            'Authorization': 'Bearer ' + accessToken
+                            'Authorization': 'Bearer ' + spodifyAccessToken
                         },
                         success: function (data) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
@@ -268,19 +310,34 @@ function artistFromObj(genre) {
 
 function getVideo () {
     if (spodifyReady == true && googleReady == true) {
-        $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
-            type: 'GET',
-            Authorization: Bearer [gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token],
-            Accept: application/json
-        }).then(function (response) {
-            console.log(response)
+        // $.ajax({
+        //     url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
+        //     type: 'GET',
+        //     Authorization: Bearer [gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token],
+        //     Accept: application/json
+        // }).then(function (response) {
+        //     console.log(response)
             
             
-        })
+        // })
+        execute()
     }
 }
 
+
+function execute() {
+    return gapi.client.youtube.search.list({
+      "q": "elvis",
+      "type": [
+        "video"
+      ]
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
 
 
 // GET https://youtube.googleapis.com/youtube/v3/search?q=eminem&type=video&key=[YOUR_API_KEY] HTTP/1.1

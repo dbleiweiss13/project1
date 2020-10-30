@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    var genres = ['Rock', 'Country', 'Rap', 'R&B', 'Pop', 'Reggae'];
+    var genres = ['Rock', 'Country', 'Rap', 'RB', 'Pop', 'Reggae'];
     var maxedOut = [];
 
     //max counter per button
@@ -12,14 +12,20 @@ $(document).ready(function () {
     var prefIndex = 0;
 
 
-    genres.forEach(e => {
+    genres.forEach((e,i) => {
+        var div = $('<div>')
+        div.addClass("genreButtonDiv")
+        div.attr('id','button-div-' + i)
 
         var button = $('<button>');
         button.text(e);
         button.addClass("click small");
         button.attr("data-genre", e);
+        // button.attr("id", e + ' button-' + i);
         button.attr("id", e);
-        $("#btnDiv").append(button);
+
+        div.append(button)
+        $("#btnDiv").append(div);
     });
 
     // on click function on buttons
