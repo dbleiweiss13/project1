@@ -9,6 +9,9 @@ var spodifyAccessToken = "BQC5k9_RcV5u5pIYVXT1Utwe-qiH3dg6wcUT6jqBHdOh-ffaXZqz86
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
 var googleClientID = '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com'
 
+var songName = '';
+var artistName = '';
+
 
 var GoogleAuth;
 var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
@@ -176,7 +179,7 @@ function getSong(artist) {
                         },
                         success: function (data) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
-                            // console.log(data.tracks[trackSelect])
+                            console.log(data.tracks[trackSelect])
                             spodifyReady = true;
                             getVideo ()
                         }
@@ -246,14 +249,14 @@ function execute() {
       "type": [
         "video"
       ]
-    })
-        .then(function(response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-                console.log('videoID',response.result.items[0].id.videoId)
-                $('#videoFrame').attr('src','https://www.youtube.com/embed/' + response.result.items[0].id.videoId)
-              },
-              function(err) { console.error("Execute error", err); });
+    }) .then(function(response) {
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        console.log('videoID',response.result.items[0].id.videoId)
+        $('#videoFrame').attr('src','https://www.youtube.com/embed/' + response.result.items[0].id.videoId)
+        },
+        function(err) { console.error("Execute error", err); 
+    });
   }
 
 
