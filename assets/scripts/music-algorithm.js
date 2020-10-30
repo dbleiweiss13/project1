@@ -2,7 +2,16 @@
 var googleReady = false;
 var spodifyReady = false;
 
-var apikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+// access token fir spodify
+var spodifyAccessToken = "BQC5k9_RcV5u5pIYVXT1Utwe-qiH3dg6wcUT6jqBHdOh-ffaXZqz86vVUkqW0eDfl6GqiLd1yG0sxqDf0gGL3QgFeahLOLJBU1zbMJeyVN7ECSrmsz6oht5rx1C1vGdIpGjTpe5ZJIucBSqOikfxDQhMO-8RBbM";
+
+//google keys
+var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
+var googleClientID = '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com'
+
+var songName = '';
+var artistName = '';
+
 
 var GoogleAuth;
 var SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
@@ -20,7 +29,7 @@ function initClient() {
     // Get API key and client ID from API Console.
     // 'scope' field specifies space-delimited list of access scopes.
     gapi.client.init({
-        'apiKey': apikey,
+        'apiKey': googleApikey,
         'clientId': '308747775295-o6rq28ejtpbmlaj83kth1c05iiajf7dr.apps.googleusercontent.com',
         'discoveryDocs': [discoveryUrl],
         'scope': SCOPE
@@ -139,9 +148,7 @@ $(document).ready(function () {
 
 //function ajax call connect to API
 function getSong(artist) {
-    // access token 
-    var accessToken = "BQAB9eju5r3Gba0zLk2qnTnqTO8TCx3AMQDNYivruFFq8CPYiE6rjm66sk_dVHFlgkyCcCiKda7UQWF4rdFVH34QDZjqOPRg4xFEPZZ3UAtJ6KcpLTHK-GpVtRnm1DNES7y829ExeF-8qPYDRxTbQRdg_rZtbYU";
-
+    
     var searchArtist = artist
 
     //get artist id using spodify search api
@@ -149,7 +156,7 @@ function getSong(artist) {
         url: 'https://api.spotify.com/v1/search?q=' + searchArtist + '&type=artist&limit=1',
         type: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + accessToken
+            'Authorization': 'Bearer ' + spodifyAccessToken
         },
         success: function (data) {
             var artistID = data.artists.items[0].id
@@ -160,7 +167,7 @@ function getSong(artist) {
                 url: 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists',
                 type: 'GET',
                 headers: {
-                    'Authorization': 'Bearer ' + accessToken
+                    'Authorization': 'Bearer ' + spodifyAccessToken
                 },
                 success: function (data) {
                     var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
@@ -168,12 +175,18 @@ function getSong(artist) {
                         url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
                         type: 'GET',
                         headers: {
-                            'Authorization': 'Bearer ' + accessToken
+                            'Authorization': 'Bearer ' + spodifyAccessToken
                         },
                         success: function (data) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
-                            // console.log(data.tracks[trackSelect])
+                            console.log(data.tracks[trackSelect])
                             spodifyReady = true;
+                            songName = trackSelect.name;
+                            artistName = trackSelect.album.artists[0].name;
+
+                            console.log(songName);
+                            console.log(artistName);
+
                             getVideo ()
                         }
                     });
@@ -228,62 +241,35 @@ function artistFromObj(genre) {
     return (artists[genre][Math.floor(Math.random() * artists[genre].length)])
 }
 
-//store history
-
-
-//store favorites
-
-
-// window.onSpotifyWebPlaybackSDKReady = () => {
-//     const token = 'BQDsDC5WqWvf7QvxonS12-hq6DXLlmQkGnawFxDovG99LBMDRA3z50d0Evy9dryG3_bqAkYJcTY-JDJ9vPeCzY3GN015GqASfK2Q8OB6DGAu43yH6AgT3RQdCZR9myJVCHelhciNpb_c0lbeXvyJAJqrr_pKeG-dmOaE-A8lWvSW4pu2u1w';
-//     const player = new Spotify.Player({
-//       name: 'Web Playback SDK Quick Start Player',
-//       getOAuthToken: cb => { cb(token); }
-//     });
-
-//     // Error handling
-//     player.addListener('initialization_error', ({ message }) => { console.error(message); });
-//     player.addListener('authentication_error', ({ message }) => { console.error(message); });
-//     player.addListener('account_error', ({ message }) => { console.error(message); });
-//     player.addListener('playback_error', ({ message }) => { console.error(message); });
-
-//     // Playback status updates
-//     player.addListener('player_state_changed', state => { console.log(state); });
-
-//     // Ready
-//     player.addListener('ready', ({ device_id }) => {
-//       console.log('Ready with Device ID', device_id);
-//     });
-
-//     // Not Ready
-//     player.addListener('not_ready', ({ device_id }) => {
-//       console.log('Device ID has gone offline', device_id);
-//     });
-
-//     // Connect to the player!
-//     player.connect();
-
-//   };
-
 
 function getVideo () {
     if (spodifyReady == true && googleReady == true) {
-        $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/search?q=eminem&type=video&key=' + apikey,
-            type: 'GET',
-            Authorization: Bearer [gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token],
-            Accept: application/json
-        }).then(function (response) {
-            console.log(response)
-            
-            
-        })
+        execute()
     }
 }
 
+
+function execute() {
+    return gapi.client.youtube.search.list({
+      "q": songName + ' ' + artistName,
+      "type": [
+        "video"
+      ]
+    }) .then(function(response) {
+        // Handle the results here (response.result has the parsed body).
+        console.log("Response", response);
+        console.log('videoID',response.result.items[0].id.videoId)
+        $('#videoFrame').attr('src','https://www.youtube.com/embed/' + response.result.items[0].id.videoId)
+        },
+        function(err) { console.error("Execute error", err); 
+    });
+  }
 
 
 // GET https://youtube.googleapis.com/youtube/v3/search?q=eminem&type=video&key=[YOUR_API_KEY] HTTP/1.1
 
 // Authorization: Bearer [YOUR_ACCESS_TOKEN]
 // Accept: application/json
+
+
+// https://www.youtube.com/watch?v=

@@ -19,28 +19,113 @@ h6{
 }
 
 .medium {
+    /* move left to offeset the change in width */
+    left: -25px;
     font-size: 30px;
     width: 120px;
     height: 120px;
 }
 
 .large {
+    /* move left to offeset the change in width */
+    left: -55px;
     font-size: 40px;
     width: 180px;
     height: 180px;
 }
 
 .largest {
+    /* move left to offeset the change in width */
+    left: -85px;
     font-size: 50px;
     width: 240px;
     height: 240px;
 }
 
+#btnDivContainer {
+    display: flex;
+    justify-content: center;
+}
+
 #btnDiv {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 200px;
     margin: auto;
-    width: 50%;
+    margin-top: 100px;
+    width: 70vw;
+    height: 550px;
     padding: 10px;
 }
+
+.genreButtonDiv {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    width: 550px;
+    pointer-events: auto; 
+}
+
+
+/* #button-div-0 {
+    transform: rotate(0);
+}
+
+#Rock {
+    transform: rotate(0);
+} */
+
+/* rotate button 1 parent div and rotate button back by same amount */
+#button-div-1 {
+    transform: rotate(60deg);
+}
+
+#Country {
+    transform: rotate(-60deg);
+}
+
+/* rotate button 2 parent div and rotate button back by same amount */
+#button-div-2 {
+    transform: rotate(120deg);
+}
+
+#Rap {
+    transform: rotate(-120deg);
+}
+
+/* rotate button 3 parent div and rotate button back by same amount */
+#button-div-3 {
+    transform: rotate(180deg);
+}
+
+#RB {
+    transform: rotate(-180deg);
+}
+
+/* rotate button 4 parent div and rotate button back by same amount */
+#button-div-4 {
+    transform: rotate(240deg);
+}
+
+#Pop {
+    transform: rotate(-240deg);
+}
+
+/* rotate button 5 parent div and rotate button back by same amount */
+#button-div-5 {
+    transform: rotate(300deg);
+}
+
+#Reggae {
+    transform: rotate(-300deg);
+}
+
+
+
 
 button {
     cursor: pointer;
@@ -48,12 +133,18 @@ button {
     height: 70px;
     border-radius: 50%;
     margin: 30px;
+    position: absolute;
     background-color:rgb(212, 220, 192);
+
 }
 
 #undo-reset-next {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     width: 7.5%;
     margin: auto;
+    height: 200px;
 }
 
 #undo {
@@ -86,3 +177,4 @@ button {
     padding-right: 100px;
 
 }
+

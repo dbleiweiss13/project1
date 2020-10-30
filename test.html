@@ -11,10 +11,26 @@
     <link rel="stylesheet" href="assets/CSS/style.css">
     <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
     <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
 </head>
 
 
 <body> 
+    <button id="sign-in-or-out-button"
+          style="margin-left: 25px">Sign In/Authorize</button>
+  <button id="revoke-access-button"
+          style="display: none; margin-left: 25px">Revoke access</button>
+
+  <button id="test">
+test
+  </button>
+  
+  <div id="auth-status" style="display: inline; padding-left: 25px"></div><hr>
+
+    <div style="height: 100vh;"> 
+        <iframe id="videoFrame" width="100%" height="auto" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
 
     <script src="./assets/scripts/music-algorithm.js"></script>
     <script async defer src="https://apis.google.com/js/api.js"
