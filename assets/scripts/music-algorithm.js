@@ -2,8 +2,8 @@
 var googleReady = false;
 var spodifyReady = false;
 
-// access token 
-var spodifyAccessToken = "BQA9rFpBjD0lT9NVe176l8qtr49nfvF5udIDQakv9X4McV4kQxWQGNfHCNt0Kg-Y01oiPvdTrN8Fkj6n-JrMCaQmJKus0uzrx2N1y-tdsKhwCV3neCYR-yeTu4v2pqmfxSIQHc7QloYZDtSBSPRWXMwpLqycZEk";
+// access token fir spodify
+var spodifyAccessToken = "BQDplo5RpGMKGSbbG5lGkSSowkS7hJqopJfKukas_jvFI3LwjFg5HncNZBbGeHhX3dnEkmBxp4f7c5TEYp1hhD7qk2e0WhzPLEDCDESHMmfTNeaw8vgES7gSvESQkUdi2agFO_lMwyWLHkiAzc97C5k6XrD9y-U";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
@@ -250,7 +250,7 @@ function execute() {
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
                 console.log("Response", response);
-                console.log(response.result.items[0].id.videoId)
+                console.log('videoID',response.result.items[0].id.videoId)
                 $('#videoFrame').attr('src','https://www.youtube.com/embed/' + response.result.items[0].id.videoId)
               },
               function(err) { console.error("Execute error", err); });
