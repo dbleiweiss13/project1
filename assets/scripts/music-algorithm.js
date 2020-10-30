@@ -136,13 +136,13 @@ $(document).ready(function () {
     //function will return song from artist name
     getSong(getArtist())
 
-    $('#next').on('click', function () {
-        getSong(getArtist())
-    })
-
     $("#favs").on("click", function () {
         favorites.push($(this).attr("data-songName"));
         localStorage.setItem("favs", JSON.stringify(favorites));
+    });
+
+    $("#skip").on("click", function () {
+        getSong(getArtist())
     });
 });
 
@@ -250,7 +250,7 @@ function getVideo () {
 
 
 function execute() {
-    console.log('song name', songName, 'artist name', artistName)
+    // console.log('song name', songName, 'artist name', artistName)
     return gapi.client.youtube.search.list({
       "q": songName + ' ' + artistName,
       "type": [
