@@ -181,10 +181,10 @@ function getSong(artist) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
                             console.log(data.tracks[trackSelect])
                             spodifyReady = true;
-                            songName = trackSelect.name;
+                            songName = data.tracks[trackSelect].name;
                             console.log(songName);
 
-                            artistName = trackSelect.album.artists[0].name;
+                            artistName = data.tracks[trackSelect].album.artists[0].name;
                             console.log(artistName);
 
                             getVideo ()
