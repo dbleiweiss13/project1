@@ -181,6 +181,12 @@ function getSong(artist) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
                             console.log(data.tracks[trackSelect])
                             spodifyReady = true;
+                            songName = trackSelect.name;
+                            artistName = trackSelect.album.artists[0].name;
+
+                            console.log(songName);
+                            console.log(artistName);
+
                             getVideo ()
                         }
                     });
@@ -245,7 +251,7 @@ function getVideo () {
 
 function execute() {
     return gapi.client.youtube.search.list({
-      "q": "elvis",
+      "q": songName + ' ' + artistName,
       "type": [
         "video"
       ]
