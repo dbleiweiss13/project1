@@ -250,6 +250,7 @@ function getVideo () {
 
 
 function execute() {
+    console.log('song name', songName, 'artist name', artistName)
     return gapi.client.youtube.search.list({
       "q": songName + ' ' + artistName,
       "type": [
