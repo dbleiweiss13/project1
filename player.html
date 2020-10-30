@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="./player.css">
   <title>Document</title>
 
+
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+
 </head>
 
 <body>
@@ -25,7 +29,7 @@
         <div class="music-player-controls">
           <a class="btn-floating btn-large waves-effect cyan" id="playBtn"><i class="material-icons">play_arrow</i></a>
           <a class="btn-floating btn-large waves-effect cyan hide" id="pauseBtn"><i class="material-icons">pause</i></a>
-          <a class="btn-floating btn-large waves-effect cyan" id="fastBtn"><i
+          <a id='skip' class="btn-floating btn-large waves-effect cyan" id="fastBtn"><i
               class="material-icons">fast_forward</i></a>
           <a class="btn-floating btn-large waves-effect waves-light red" id="favBtn"><i
               class="material-icons">favorite</i></a>
@@ -34,8 +38,10 @@
       </div>
     </div>
     <div class="album">
-      <div class="album-art"></div><!--  /.album-art -->
+      <div class="album-art">
+      <iframe id="videoFrame" width="100%" height="315" src="https://www.youtube.com/embed/Z2YLEPFa750" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+      </div><!--  /.album-art -->
     </div>
   </div>
   </br>
@@ -124,6 +130,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="./assets/scripts/music-algorithm.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
   <script src="./player.js"></script>
 </body>
 

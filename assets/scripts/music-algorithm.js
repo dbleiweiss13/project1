@@ -3,7 +3,7 @@ var googleReady = false;
 var spodifyReady = false;
 
 // access token fir spodify
-var spodifyAccessToken = "BQC5k9_RcV5u5pIYVXT1Utwe-qiH3dg6wcUT6jqBHdOh-ffaXZqz86vVUkqW0eDfl6GqiLd1yG0sxqDf0gGL3QgFeahLOLJBU1zbMJeyVN7ECSrmsz6oht5rx1C1vGdIpGjTpe5ZJIucBSqOikfxDQhMO-8RBbM";
+var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
@@ -136,13 +136,13 @@ $(document).ready(function () {
     //function will return song from artist name
     getSong(getArtist())
 
-    $('#next').on('click', function () {
-        getSong(getArtist())
-    })
-
     $("#favs").on("click", function () {
         favorites.push($(this).attr("data-songName"));
         localStorage.setItem("favs", JSON.stringify(favorites));
+    });
+
+    $("#skip").on("click", function () {
+        getSong(getArtist())
     });
 });
 
@@ -181,10 +181,10 @@ function getSong(artist) {
                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
                             console.log(data.tracks[trackSelect])
                             spodifyReady = true;
-                            songName = trackSelect.name;
-                            artistName = trackSelect.album.artists[0].name;
-
+                            songName = data.tracks[trackSelect].name;
                             console.log(songName);
+
+                            artistName = data.tracks[trackSelect].album.artists[0].name;
                             console.log(artistName);
 
                             getVideo ()
@@ -250,6 +250,7 @@ function getVideo () {
 
 
 function execute() {
+    // console.log('song name', songName, 'artist name', artistName)
     return gapi.client.youtube.search.list({
       "q": songName + ' ' + artistName,
       "type": [
