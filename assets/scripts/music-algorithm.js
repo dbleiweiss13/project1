@@ -105,31 +105,31 @@ function updateSigninStatus() {
 
 
 
-//get data from local storage
-var musicPreferences = JSON.parse(localStorage.getItem("prefs"));
+// //get data from local storage
+// var musicPreferences = JSON.parse(localStorage.getItem("prefs"));
 
-var artists = {
-    rock: [
-        'rolling stones'
-    ],
-    rap: [
-        'Eminem'
-    ],
-    country: [
-        'Willie Nelson'
-    ],
-    rb: [
-        'Drake'
-    ],
-    pop: [
-        'Beyonce'
-    ],
-    reggae: [
-        'Bob Marley'
-    ]
-}
+// var artists = {
+//     rock: [
+//         'rolling stones'
+//     ],
+//     rap: [
+//         'Eminem'
+//     ],
+//     country: [
+//         'Willie Nelson'
+//     ],
+//     rb: [
+//         'Drake'
+//     ],
+//     pop: [
+//         'Beyonce'
+//     ],
+//     reggae: [
+//         'Bob Marley'
+//     ]
+// }
 
-// console.log(musicPreferences)
+// // console.log(musicPreferences)
 
 $(document).ready(function () {
     //create function to pick genre and related artist of next song 
@@ -138,115 +138,115 @@ $(document).ready(function () {
     //function will return song from artist name
     // getSong(getArtist())
 
-    $('#next').on('click', function () {
-        getSong(getArtist())
-    })
+    // $('#next').on('click', function () {
+    //     getSong(getArtist())
+    // })
 
-    $("#favs").on("click", function () {
-        favorites.push($(this).attr("data-songName"));
-        localStorage.setItem("favs", JSON.stringify(favorites));
-    });
+    // $("#favs").on("click", function () {
+    //     favorites.push($(this).attr("data-songName"));
+    //     localStorage.setItem("favs", JSON.stringify(favorites));
+    // });
 });
 
 //function ajax call connect to API
-function getSong(artist) {
+// function getSong(artist) {
     
-    var searchArtist = artist
+//     var searchArtist = artist
 
-    //get artist id using spodify search api
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search?q=' + searchArtist + '&type=artist&limit=1',
-        type: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + spodifyAccessToken
-        },
-        success: function (data) {
-            var artistID = data.artists.items[0].id
-            // console.log(artistID)
+//     //get artist id using spodify search api
+//     $.ajax({
+//         url: 'https://api.spotify.com/v1/search?q=' + searchArtist + '&type=artist&limit=1',
+//         type: 'GET',
+//         headers: {
+//             'Authorization': 'Bearer ' + spodifyAccessToken
+//         },
+//         success: function (data) {
+//             var artistID = data.artists.items[0].id
+//             // console.log(artistID)
 
-            // get related artists using spodify artist api
-            $.ajax({
-                url: 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists',
-                type: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + spodifyAccessToken
-                },
-                success: function (data) {
-                    var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
-                    $.ajax({
-                        url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
-                        type: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + spodifyAccessToken
-                        },
-                        success: function (data) {
-                            var trackSelect = Math.floor(Math.random() * data.tracks.length)
-                            console.log(data.tracks[trackSelect])
-                            spodifyReady = true;
-                            songName = data.tracks[trackSelect].name;
-                            console.log(songName);
+//             // get related artists using spodify artist api
+//             $.ajax({
+//                 url: 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists',
+//                 type: 'GET',
+//                 headers: {
+//                     'Authorization': 'Bearer ' + spodifyAccessToken
+//                 },
+//                 success: function (data) {
+//                     var randomArtistID = data.artists[Math.floor(Math.random() * data.artists.length)].id
+//                     $.ajax({
+//                         url: 'https://api.spotify.com/v1/artists/' + randomArtistID + '/top-tracks?market=us',
+//                         type: 'GET',
+//                         headers: {
+//                             'Authorization': 'Bearer ' + spodifyAccessToken
+//                         },
+//                         success: function (data) {
+//                             var trackSelect = Math.floor(Math.random() * data.tracks.length)
+//                             console.log(data.tracks[trackSelect])
+//                             spodifyReady = true;
+//                             songName = data.tracks[trackSelect].name;
+//                             console.log(songName);
 
-                            artistName = data.tracks[trackSelect].album.artists[0].name;
-                            console.log(artistName);
+//                             artistName = data.tracks[trackSelect].album.artists[0].name;
+//                             console.log(artistName);
 
-                            getVideo ()
-                        }
-                    });
+//                             getVideo ()
+//                         }
+//                     });
 
-                }
-            });
+//                 }
+//             });
 
-        }
-    });
-}
+//         }
+//     });
+// }
 
-function getArtist() {
-    var genrePickArray = []
-    musicPreferences.forEach(e => {
-        for (var i = 0; i < e.count; i++) {
-            genrePickArray.push(e.genre)
-        }
-    })
+// function getArtist() {
+//     var genrePickArray = []
+//     musicPreferences.forEach(e => {
+//         for (var i = 0; i < e.count; i++) {
+//             genrePickArray.push(e.genre)
+//         }
+//     })
 
-    // console.log(genrePickArray)
+//     // console.log(genrePickArray)
 
-    var genreRand = genrePickArray[Math.floor(Math.random() * genrePickArray.length)]
-    var pickedArtist = ''
+//     var genreRand = genrePickArray[Math.floor(Math.random() * genrePickArray.length)]
+//     var pickedArtist = ''
 
-    if (genreRand == 'Rock') {
-        pickedArtist = artistFromObj('rock')
-    }
-    else if (genreRand == 'Country') {
-        pickedArtist = artistFromObj('country')
-    }
-    else if (genreRand == 'Rap') {
-        pickedArtist = artistFromObj('rap')
-    }
-    else if (genreRand == 'R&B') {
-        pickedArtist = artistFromObj('rb')
-    }
-    else if (genreRand == 'Pop') {
-        pickedArtist = artistFromObj('pop')
-    }
-    else if (genreRand == 'Reggae') {
-        pickedArtist = artistFromObj('reggae')
-    }
-    else {
-        console.log('error picking artist')
-        return (null)
-    }
+//     if (genreRand == 'Rock') {
+//         pickedArtist = artistFromObj('rock')
+//     }
+//     else if (genreRand == 'Country') {
+//         pickedArtist = artistFromObj('country')
+//     }
+//     else if (genreRand == 'Rap') {
+//         pickedArtist = artistFromObj('rap')
+//     }
+//     else if (genreRand == 'R&B') {
+//         pickedArtist = artistFromObj('rb')
+//     }
+//     else if (genreRand == 'Pop') {
+//         pickedArtist = artistFromObj('pop')
+//     }
+//     else if (genreRand == 'Reggae') {
+//         pickedArtist = artistFromObj('reggae')
+//     }
+//     else {
+//         console.log('error picking artist')
+//         return (null)
+//     }
 
-    return (pickedArtist)
-}
+//     return (pickedArtist)
+// }
 
-function artistFromObj(genre) {
-    return (artists[genre][Math.floor(Math.random() * artists[genre].length)])
-}
+// function artistFromObj(genre) {
+//     return (artists[genre][Math.floor(Math.random() * artists[genre].length)])
+// }
 
 
 function getVideo () {
+    execute()
     if (spodifyReady == true && googleReady == true) {
-        execute()
     }
 }
 
