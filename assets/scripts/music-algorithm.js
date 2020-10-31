@@ -1,9 +1,9 @@
 
 var googleReady = false;
-var spodifyReady = false;
+var spodifyReady = true;
 
 // access token fir spodify
-var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
+// var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
@@ -45,9 +45,9 @@ function initClient() {
 
         // Call handleAuthClick function when user clicks on
         //      "Sign In/Authorize" button.
-        $('#sign-in-or-out-button').click(function () {
+        // $('#sign-in-or-out-button').click(function () {
             handleAuthClick();
-        });
+        // });
         $('#revoke-access-button').click(function () {
             revokeAccess();
         });
@@ -57,7 +57,7 @@ function initClient() {
 function handleAuthClick() {
     if (GoogleAuth.isSignedIn.get()) {
         // User is authorized and has clicked "Sign out" button.
-        GoogleAuth.signOut();
+        // GoogleAuth.signOut();
     } else {
         // User is not signed in. Start Google auth flow.
         GoogleAuth.signIn();
@@ -252,7 +252,8 @@ function getVideo () {
 function execute() {
     // console.log('song name', songName, 'artist name', artistName)
     return gapi.client.youtube.search.list({
-      "q": songName + ' ' + artistName,
+    //   "q": songName + ' ' + artistName,
+    "q": 'the beatles',
       "type": [
         "video"
       ]
