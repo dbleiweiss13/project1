@@ -79,7 +79,6 @@ function setSigninStatus() {
         //     'access to this app.');
         googleReady = true;
         // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
-        // getVideo ()
         getVideo ()
 
     } else {
@@ -137,7 +136,7 @@ $(document).ready(function () {
     // console.log(getArtist());
 
     //function will return song from artist name
-    getSong(getArtist())
+    // getSong(getArtist())
 
     $("#favs").on("click", function () {
         favorites.push($(this).attr("data-songName"));
