@@ -1,9 +1,9 @@
 
 var googleReady = false;
-var spodifyReady = false;
+var spodifyReady = true;
 
 // access token fir spodify
-var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
+// var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
@@ -136,7 +136,7 @@ $(document).ready(function () {
     // console.log(getArtist());
 
     //function will return song from artist name
-    getSong(getArtist())
+    // getSong(getArtist())
 
     $('#next').on('click', function () {
         getSong(getArtist())
