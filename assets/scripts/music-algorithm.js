@@ -35,6 +35,7 @@ function initClient() {
         'scope': SCOPE
     }).then(function () {
         GoogleAuth = gapi.auth2.getAuthInstance();
+        GoogleAuth.signIn();
 
         // Listen for sign-in state changes.
         GoogleAuth.isSignedIn.listen(updateSigninStatus);
@@ -46,7 +47,7 @@ function initClient() {
         // Call handleAuthClick function when user clicks on
         //      "Sign In/Authorize" button.
         // $('#sign-in-or-out-button').click(function () {
-            handleAuthClick();
+            // handleAuthClick();
         // });
         $('#revoke-access-button').click(function () {
             revokeAccess();
@@ -72,18 +73,18 @@ function setSigninStatus() {
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-        $('#sign-in-or-out-button').html('Sign out');
-        $('#revoke-access-button').css('display', 'inline-block');
-        $('#auth-status').html('You are currently signed in and have granted ' +
-            'access to this app.');
+        // $('#sign-in-or-out-button').html('Sign out');
+        // $('#revoke-access-button').css('display', 'inline-block');
+        // $('#auth-status').html('You are currently signed in and have granted ' +
+        //     'access to this app.');
         googleReady = true;
         // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
         getVideo ()
     } else {
-        $('#sign-in-or-out-button').html('Sign In/Authorize');
-        $('#revoke-access-button').css('display', 'none');
-        $('#auth-status').html('You have not authorized this app or you are ' +
-            'signed out.');
+        // $('#sign-in-or-out-button').html('Sign In/Authorize');
+        // $('#revoke-access-button').css('display', 'none');
+        // $('#auth-status').html('You have not authorized this app or you are ' +
+        //     'signed out.');
     }
 }
 
