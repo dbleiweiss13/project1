@@ -253,7 +253,8 @@ function getVideo () {
 
 function execute() {
     return gapi.client.youtube.search.list({
-      "q": songName + ' ' + artistName,
+    //   "q": songName + ' ' + artistName,
+    "q": 'elvis',
       "type": [
         "video"
       ]
