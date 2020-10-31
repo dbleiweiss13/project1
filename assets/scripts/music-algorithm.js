@@ -79,7 +79,9 @@ function setSigninStatus() {
         //     'access to this app.');
         googleReady = true;
         // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
+        // getVideo ()
         getVideo ()
+
     } else {
         // $('#sign-in-or-out-button').html('Sign In/Authorize');
         // $('#revoke-access-button').css('display', 'none');
