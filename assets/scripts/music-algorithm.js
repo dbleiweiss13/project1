@@ -1,4 +1,7 @@
 
+$(document).ready(function () {
+
+
 var googleReady = false;
 var spodifyReady = true;
 
@@ -131,7 +134,6 @@ function updateSigninStatus() {
 
 // // console.log(musicPreferences)
 
-$(document).ready(function () {
     //create function to pick genre and related artist of next song 
     // console.log(getArtist());
 
@@ -146,7 +148,6 @@ $(document).ready(function () {
     //     favorites.push($(this).attr("data-songName"));
     //     localStorage.setItem("favs", JSON.stringify(favorites));
     // });
-});
 
 //function ajax call connect to API
 // function getSong(artist) {
@@ -276,3 +277,5 @@ function execute() {
 
 
 // https://www.youtube.com/watch?v=
+
+});
