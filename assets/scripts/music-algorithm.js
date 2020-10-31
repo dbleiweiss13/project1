@@ -1,9 +1,9 @@
 
 var googleReady = false;
-var spodifyReady = true;
+var spodifyReady = false;
 
 // access token fir spodify
-// var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
+var spodifyAccessToken = "BQC8BGpC_DxbHmu7RV9NwCFuK_pc3z9AzW9U3mI1K_r6952xIAZ4LhLE_cW0B6lARnZ1swwKL2kA17anEt_iFWKnY_VSOViY3OS08mwKlVSEjkRYiaa9nzx5Iotv1NrE2ZdixtEzXWJR4fNy3wlomEstnXLGkgs";
 
 //google keys
 var googleApikey = 'AIzaSyD_Lxn97l1Pe7HVXohJPIojqhqHyuCevF4';
@@ -35,7 +35,6 @@ function initClient() {
         'scope': SCOPE
     }).then(function () {
         GoogleAuth = gapi.auth2.getAuthInstance();
-        GoogleAuth.signIn();
 
         // Listen for sign-in state changes.
         GoogleAuth.isSignedIn.listen(updateSigninStatus);
@@ -46,9 +45,9 @@ function initClient() {
 
         // Call handleAuthClick function when user clicks on
         //      "Sign In/Authorize" button.
-        // $('#sign-in-or-out-button').click(function () {
-            // handleAuthClick();
-        // });
+        $('#sign-in-or-out-button').click(function () {
+            handleAuthClick();
+        });
         $('#revoke-access-button').click(function () {
             revokeAccess();
         });
@@ -58,7 +57,7 @@ function initClient() {
 function handleAuthClick() {
     if (GoogleAuth.isSignedIn.get()) {
         // User is authorized and has clicked "Sign out" button.
-        // GoogleAuth.signOut();
+        GoogleAuth.signOut();
     } else {
         // User is not signed in. Start Google auth flow.
         GoogleAuth.signIn();
@@ -73,19 +72,19 @@ function setSigninStatus() {
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-        // $('#sign-in-or-out-button').html('Sign out');
-        // $('#revoke-access-button').css('display', 'inline-block');
-        // $('#auth-status').html('You are currently signed in and have granted ' +
-        //     'access to this app.');
+        $('#sign-in-or-out-button').html('Sign out');
+        $('#revoke-access-button').css('display', 'inline-block');
+        $('#auth-status').html('You are currently signed in and have granted ' +
+            'access to this app.');
         googleReady = true;
         // console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token)
         getVideo ()
-
     } else {
-        // $('#sign-in-or-out-button').html('Sign In/Authorize');
-        // $('#revoke-access-button').css('display', 'none');
-        // $('#auth-status').html('You have not authorized this app or you are ' +
-        //     'signed out.');
+        $('#button-div').css('display','unset')
+        $('#sign-in-or-out-button').html('Sign In/Authorize');
+        $('#revoke-access-button').css('display', 'none');
+        $('#auth-status').html('You have not authorized this app or you are ' +
+            'signed out.');
     }
 }
 
@@ -136,15 +135,15 @@ $(document).ready(function () {
     // console.log(getArtist());
 
     //function will return song from artist name
-    // getSong(getArtist())
+    getSong(getArtist())
+
+    $('#next').on('click', function () {
+        getSong(getArtist())
+    })
 
     $("#favs").on("click", function () {
         favorites.push($(this).attr("data-songName"));
         localStorage.setItem("favs", JSON.stringify(favorites));
-    });
-
-    $("#skip").on("click", function () {
-        getSong(getArtist())
     });
 });
 
@@ -252,10 +251,8 @@ function getVideo () {
 
 
 function execute() {
-    // console.log('song name', songName, 'artist name', artistName)
     return gapi.client.youtube.search.list({
-    //   "q": songName + ' ' + artistName,
-    "q": 'the beatles',
+      "q": songName + ' ' + artistName,
       "type": [
         "video"
       ]
